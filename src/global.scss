@@ -1,0 +1,182 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+.toolbar-content{
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: full;
+    padding-right: 5%;
+    align-items: center;
+
+    
+  ion-title{
+    font-weight: 100;
+    font-size: 14px;
+    color:white;
+    justify-self: center;
+
+  }
+  ion-avatar{
+      
+      width: 30px;
+      height: 30px;
+      justify-self: flex-end;
+      align-self: center;              
+
+    }
+
+    ion-back-button{
+      --color: white;
+    }
+    
+
+  
+}
+
+
+  .toolbar-bg{
+    --background: linear-gradient(#20478c ,#2485c9);
+  }
+
+  .center-img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:auto;
+    margin-bottom:auto;
+    width: 50%;
+    height: 50%;
+
+    
+  }
+
+  .my-custom-class{
+    --width:75vw;
+    #header-card{
+      /*text-align: left;
+      background: linear-gradient(-90deg,#20478B ,#2487C9);    
+      color:white;
+      font-size: 12px;
+      height: 50px;*/
+
+      background: linear-gradient(-90deg,#20478B ,#2487C9);    
+      color:white;
+      justify-content: center;
+      height: 50px;
+      ion-title{
+        font-size: 13px;
+        padding-top: 5%;
+      }
+    }
+    #body-content{
+      display: grid;
+      width: 95%;
+      height: 150;
+      font-size: 12px;
+      padding-left: 3px;
+      grid-template-rows:25px, 25px, repeat(3,24px) ;
+      justify-content: center;
+      align-content: center;
+      
+      
+  
+    }
+    #buttons-content{
+      display: grid;
+      width: 100%;
+      grid-template-columns:repeat(2,50%) ; 
+      justify-items:center;
+      align-items: center;
+
+    }
+    #preg{
+      text-align: center;
+    }
+    .btn-si{
+      --background: #E5242F;  
+      --border-radius:50%; 
+      width:50px;
+      height: 50px;
+  
+    }
+  
+    .btn-no{
+      --background: #AEADB3;  
+      --border-radius:50%; 
+      width:50px;
+      height: 50px;
+    }
+     
+
+  }
+
+
+  .notification-class{
+    --height:45vh;
+    --width:75vw;
+    #header-card{
+      
+      //display: flex;
+      background: linear-gradient(-90deg,#20478B ,#2487C9);    
+      color:white;
+      justify-content: center;
+      height: 50px;
+      ion-title{
+        font-size: 13px;
+        padding-top: 5%;
+      }
+      
+    }
+
+    img{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top:30px;
+      margin-bottom:10px;
+      width: 75px;
+      height: 75px;
+      
+    }
+
+    p{
+      text-align: center;
+      padding-top: 10px;
+      font-size: 12px;
+      padding-bottom: 10%;
+    }
+  }
+
+  .btn{
+    
+    color: #2487C9;  
+    
+    //padding-top: 10%;
+  }
+

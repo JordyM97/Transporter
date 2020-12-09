@@ -1,0 +1,8 @@
+ion-tab-button[aria-selected=true] {
+  background-color:#e6242f;
+}
+
+ion-tab-button{
+  --color-focused: #e6242f;
+  --color-selected:white;
+}

@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar-bg">
+    <div class="toolbar-content">
+      <ion-button fill="clear" slot="start">
+        <ion-menu-button color="light" slot="start"></ion-menu-button>
+      </ion-button>
+
+
+      <ion-title class="ion-text-center" text-capitalize>
+        Servicio en curso
+      </ion-title>
+
+
+      <ion-avatar>
+        <img src="assets/icon/avatar.png">
+      </ion-avatar>
+
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="mapa"></div>
+  <div id="header">
+    <h5>DETALLE DEL SERVICIO</h5>
+  </div>
+
+  <div id="content">
+    <p><strong>Inicio: </strong>{{shareData.inicio}}</p>
+    <p><strong>Fin: </strong>{{shareData.fin}}</p>
+    <p><strong>Hora: </strong>{{shareData.detalleServicio.data.hora}}</p>
+    <p><strong>Método de Pago: </strong>{{shareData.detalleServicio.data.metodoPago}}</p>
+    <p><strong>Valor: </strong>${{shareData.detalleServicio.data.valor}}</p>
+  </div>
+
+  <div class="botones">
+    <ion-button expand="full" id="confirmar" (click)="presentPopoverInicio()">INICIAR</ion-button>
+    <ion-button expand="full" id="finalizar" (click)="presentPopoverFin()" disabled>FINALIZAR</ion-button>
+  </div>
+
+  <!-- fab que contiene los botones para chat y llamada -->
+  <ion-fab vertical="center" horizontal="end" slot="fixed" color="tertiary">
+    <ion-fab-button id="chatbubble" (click)="chatWithClient()">
+      <ion-icon name="chatbubble-outline"></ion-icon>
+    </ion-fab-button>
+    
+    <ion-fab-button id="callbubble" (click)="callByCellphone()">
+      <ion-icon name="call-outline"></ion-icon>
+    </ion-fab-button>
+
+    <ion-item>
+      <ion-badge slot="start">11</ion-badge>
+      <ion-label>My Item</ion-label>
+      <ion-badge slot="end">22</ion-badge>
+    </ion-item>
+  </ion-fab>
+
+</ion-content>

@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "627980958884",
+    "firebase_url": "https://vehicular-287023.firebaseio.com",
+    "project_id": "vehicular-287023",
+    "storage_bucket": "vehicular-287023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627980958884:android:8aef807e0377edb698fa31",
+        "android_client_info": {
+          "package_name": "com.careapp.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "627980958884-vtijkffn44khtscdsfru6vcnonl8djdg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChxT5uv0rNNprmC_hZhbG7CChL_5TB0NI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "627980958884-vtijkffn44khtscdsfru6vcnonl8djdg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627980958884:android:65929224c84ac60c98fa31",
+        "android_client_info": {
+          "package_name": "com.trasnporter.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "627980958884-vtijkffn44khtscdsfru6vcnonl8djdg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChxT5uv0rNNprmC_hZhbG7CChL_5TB0NI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "627980958884-vtijkffn44khtscdsfru6vcnonl8djdg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

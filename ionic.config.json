@@ -1,0 +1,8 @@
+{
+  "name": "transporter-proveedor",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

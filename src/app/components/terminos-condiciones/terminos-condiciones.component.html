@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar-bg">
+    <div class="toolbar-content">
+      <ion-buttons slot="start" >
+        <ion-back-button defaultHref="/tabs/map" text="" icon="close" (click)='closeModal()'>
+        
+        </ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-center" text-capitalize>
+        Terminos y Condiciones
+      </ion-title>
+      
+      <ion-avatar>
+        <img src="assets/icon/avatar.png">
+      </ion-avatar>
+
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- {
+    idPolice: 2, 
+    descriptionPolice: "Políticas de la empresa TRANSPORTER↵Esta sección e…jes son de prueba↵TRANSESPOL↵Editando la política", 
+    typePolice: "Driver", 
+    companyPolice: 1} -->
+  <h2>
+    ID: {{politicas.idPolice}}
+  </h2>
+  <h3>
+    Para: {{politicas.typePolice}}
+  </h3>
+  <h3>
+    Version de Politica de Empresa: {{politicas.companyPolice}}
+  </h3>
+  <h2>
+    Descripcion:
+  </h2>
+  <p>
+    
+    {{politicas.descriptionPolice}}
+  </p>
+
+</ion-content>

@@ -1,0 +1,62 @@
+<ion-app>
+  <ion-menu side="start" menuId="first" contentId="main">
+
+    <ion-content>
+      <div class="menu-bg">
+
+        <div class="menu-header-content">
+          <ion-avatar>
+            <img src="assets/imgs/user.png">
+          </ion-avatar>
+          <label>
+            <h4>BRENDAN MOORE</h4>
+            <p>Editar perfil</p>
+          </label>
+        </div>
+
+        <ion-list lines="none" class="menu-items" color=“transparent”>
+          <ion-menu-toggle>
+            <ion-item color=“transparent”>
+              <ion-icon name="person"></ion-icon>Mi perfil
+            </ion-item>
+          </ion-menu-toggle>
+          
+          <ion-menu-toggle>
+            <ion-item color=“transparent”>
+              <ion-icon name="document-text-outline"></ion-icon>Mi historial de servicios
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle>
+            <ion-item color=“transparent” (click) = "getPoliticas()">
+              <ion-icon name="newspaper-outline"></ion-icon>Términos y condiciones
+            </ion-item>
+          </ion-menu-toggle>
+
+  <!--         <ion-menu-toggle>
+            <ion-item color=“transparent” button (click)="presentPopoverInicio()">
+              <ion-icon name="pin-outline"></ion-icon>Iniciar Servicio
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle>
+            <ion-item color=“transparent” button (click)="presentPopoverFin()">
+              <ion-icon name="stop-circle-outline"></ion-icon>Finalizar Servicio
+            </ion-item>
+          </ion-menu-toggle>
+ -->
+        </ion-list>
+
+        <div class="out-content">
+          <hr>
+          <ion-menu-toggle>
+            <ion-text color=“transparent” (click)="on_logout()">
+              <span class="text"> CERRAR SESIÓN</span>
+            </ion-text>
+          </ion-menu-toggle>
+        </div>
+      </div>
+
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>

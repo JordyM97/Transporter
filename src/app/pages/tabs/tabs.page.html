@@ -1,0 +1,17 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom" class="tabs-bg">
+    <ion-tab-button  tab="message"> 
+      <ion-icon name="mail"></ion-icon>
+      <ion-label>Mis mensajes</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="notification" (click)="resetBadgeCount()">
+      <ion-icon name="notifications"></ion-icon>
+      <ion-label>Notificaciones</ion-label>
+    
+    </ion-tab-button>
+    <ion-tab-button tab="chat">
+      <ion-icon name="chatbox"></ion-icon>
+      <ion-label>Chat</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
