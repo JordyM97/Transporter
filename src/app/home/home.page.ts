@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
 
 import { AuthService } from "../services/auth.service";
 
@@ -43,8 +45,15 @@ export class HomePage implements OnInit {
   
   
   constructor(
-    private AFauth: AuthService
-  ) {}
+    private AFauth: AuthService,
+    public platform: Platform,
+    public router: Router,
+  ) {
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      this.router.navigateByUrl('Home')
+    });
+
+  }
   
   ngOnInit(){
     this.notificacionesBD.forEach((not:notification) => {

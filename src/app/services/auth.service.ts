@@ -8,6 +8,7 @@ import { isNullOrUndefined } from 'util';
 import { ToastController } from '@ionic/angular';
 import { User } from '../interfaces/user';
 import { Observable } from 'rxjs';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 
 @Injectable({
@@ -15,18 +16,53 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private userInfor: Observable<firebase.User>;
+  public token: any;
+  public id:any;
+  public nombre: any;
+  public apellido: any;
+  public correo: any;
+  public deviceToken:any;
+  public historial : Array<any>;
   public userApp: User;
   public currentUser:any;
 
   constructor(
     private AFauth: AngularFireAuth,
     private router: Router,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public http: HttpClient
   ) {
-    this.getUserInformation();
     this.getCurrentUser();
    }
+
+   sendDeviceToken(){
+    console.log(this.token);
+    console.log(this.deviceToken);
+    let req={
+      user: this.id,
+      registration_id: this.deviceToken,
+      type: "android"
+    }
+    return new Promise((resolve, reject) => {
+      let headers = new HttpHeaders();
+      
+      headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(this.token));
+    
+      this.http.post('https://axela.pythonanywhere.com/api/devices', req, {headers: headers}) //http://127.0.0.1:8000
+        .subscribe(res => {
+          let data = JSON.parse(JSON.stringify(res));
+          data.forEach(element => {
+            console.log(element) //Recorrer los elementos del array y extraer la info
+          });
+          console.log(data);
+          resolve("ok");
+          }, (err) => {
+          console.log(err);
+          //resolve("ok");
+          resolve("bad");
+        });  });
+    
+  }
 
   /**
    * Login de respuesta asincrona que en caso de ser exitosa 
@@ -35,21 +71,34 @@ export class AuthService {
    * @contrasenia
    * @returns una promesa con estados resolve (exito) y reject (fallida).
    */
-  login(correo_electronico: string, contrasenia: string) {
-    return new Promise(
-      (resolve, reject) => {
-        this.AFauth.signInWithEmailAndPassword(correo_electronico, contrasenia)
-          .then(res => {
-            console.log('Credential: ',res)
-            resolve(res)
-          }).catch(
-            err => {
-              console.error('ERROR> En la auth. Linea 16 in auth.service.ts' + err)
-              reject(err)
-            }
-          )
-      }
-    );
+  login(credentials){
+    console.log(credentials);
+    console.log(JSON.stringify(credentials));
+    
+    return new Promise((resolve, reject) => {
+        let headers = new HttpHeaders();
+       
+      //headers = headers.set('Access-Control-Allow-Origin' , '*');
+       //headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+       //headers.append('Accept','application/json');
+       //headers.append('content-type','application/json');
+ 
+        this.http.post('https://axela.pythonanywhere.com/api/rest-auth/', credentials, {headers: headers}) //http://127.0.0.1:8000
+          .subscribe(res => {
+            let data = JSON.parse(JSON.stringify(res));
+            this.id=data.id;
+            this.token = data.token;
+            this.nombre = data.first_name;
+            this.apellido = data.last_name;
+            this.correo = data.email;
+            console.log(data);
+            resolve("ok");
+            }, (err) => {
+            console.log(err);
+            //resolve("ok");
+            resolve("bad");
+          });  });
+ 
   }
 
 
@@ -106,21 +155,6 @@ export class AuthService {
       position: 'top',
     });
     toast.present();
-  }
-
-  getUserInformation(){
-    this.userInfor= this.AFauth.user;
-
-    this.userInfor.subscribe(
-      user =>{
-        console.log('Infor > ',user);
-        this.userApp={
-          uid:user.uid,
-          email:user.email,
-          phoneNumber:user.phoneNumber,
-        }
-      }
-    );
   }
 
   getCurrentUser(){

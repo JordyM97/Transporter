@@ -10,9 +10,6 @@ import { ToastController } from '@ionic/angular';
 import { LoaderService } from 'src/app/services/loader.service';
 
 
-
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -32,7 +29,7 @@ export class LoginPage implements OnInit {
   passwordIcon='eye';
 
   constructor(
-    private auth_service: AuthService, 
+    private authService: AuthService, 
     public router:Router,
     public toastController: ToastController,
     private ionLoader: LoaderService,
@@ -44,24 +41,25 @@ export class LoginPage implements OnInit {
 
 
   on_submit_login(){
-    console.log("Dio click al iniciar sesion");
-    //Cachar la promise del service/auth
-    this.ionLoader.showLoader();
-    this.auth_service.login(this.correo_electronico,this.contrasenia)
-    .then(//Respuesta positiva
-      res =>{
-        this.ionLoader.hideLoader()
-        this.router.navigate(['/tabs'])
-        this.correo_electronico=""
-        this.contrasenia=""
-      } 
-    ).catch(
-      err =>{
-        //Verificar si es un Network Error
-        this.ionLoader.hideLoader()
+    let credentials= {
+      username: this.correo_electronico,
+      password: this.contrasenia
+    };
+    localStorage.setItem("correo",credentials.username);
+    localStorage.setItem("password",credentials.password);
+
+    this.authService.login(credentials).then( (result)=>{
+      console.log(result)
+      //console.log(this.authService.token);
+      if(result=="ok"){
+        this.authService.sendDeviceToken();
+        console.log("Mandar a tabs")
+        this.router.navigate(['tabs'])
+      }
+      else{
         this.presentToastFeedback()
-      } 
-    );
+      }
+    })
   }
 
   

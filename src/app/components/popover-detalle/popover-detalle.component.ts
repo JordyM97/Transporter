@@ -17,7 +17,10 @@ export class PopoverDetalleComponent implements OnInit {
   valor;
 
 
-  constructor(private router: Router,private navParams: NavParams,private popover:PopoverController) {
+  constructor(
+    private router: Router,
+    private navParams: NavParams,
+    private popover:PopoverController){
     this.title=this.navParams.get("title");
     this.inicio=this.navParams.get("inicio");
     this.fin=this.navParams.get("fin");
