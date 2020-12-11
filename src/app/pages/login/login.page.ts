@@ -50,7 +50,7 @@ export class LoginPage implements OnInit {
 
     this.authService.login(credentials).then( (result)=>{
       console.log(result)
-      //console.log(this.authService.token);
+      console.log(this.authService.token);
       if(result=="ok"){
         this.authService.sendDeviceToken();
         console.log("Mandar a tabs")

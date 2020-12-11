@@ -19,17 +19,20 @@ import { ShareDataService } from './share-data.service';
 import { PopoverDetalleComponent } from '../components/popover-detalle/popover-detalle.component';
 import { DetalleServicioService } from './detalle-servicio.service';
 import { PopoverController } from '@ionic/angular';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FcmService {
-
+  as:any;
+  a:any;
   constructor(
     private router: Router,
     private shareData: ShareDataService,
     private detalle:DetalleServicioService,
     private popoverController: PopoverController,
+    private authService:AuthService
   ) {
 
   }
@@ -63,7 +66,14 @@ export class FcmService {
         //alert('Push registration success, token: ' + token.value);
         console.log('My token: ' + JSON.stringify(token))
         //Enviar post con el token
-        
+        this.a= token.value.toString();
+        this.as={
+          token : this.a
+        }
+        this.authService.deviceToken=this.as;
+        //alert('Push registration success, token: ' + token.value);
+        //console.log(token)
+        this.authService.postDataAPI(this.as);
         
       }
     );
@@ -137,6 +147,9 @@ export class FcmService {
           // this.presentPopoverDetalle(notification);
           }
           
+        }
+        else{
+
         }
       }
     );

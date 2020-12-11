@@ -9,6 +9,7 @@ import { ToastController } from '@ionic/angular';
 import { User } from '../interfaces/user';
 import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 
 @Injectable({
@@ -25,14 +26,19 @@ export class AuthService {
   public historial : Array<any>;
   public userApp: User;
   public currentUser:any;
+  servicios: Observable<any[]>;
+  serviciosCollection: AngularFirestoreCollection<any>;
 
   constructor(
     private AFauth: AngularFireAuth,
     private router: Router,
     public toastController: ToastController,
-    public http: HttpClient
+    public http: HttpClient,private firestore: AngularFirestore
   ) {
     this.getCurrentUser();
+    this.historial = [];
+    this.serviciosCollection=firestore.collection('token');
+    this.servicios= this.serviciosCollection.valueChanges();
    }
 
    sendDeviceToken(){
@@ -40,9 +46,14 @@ export class AuthService {
     console.log(this.deviceToken);
     let req={
       user: this.id,
-      registration_id: this.deviceToken,
+      registration_id: this.deviceToken.token,
       type: "android"
     }
+    let tok={
+      token:this.deviceToken.token,
+      app: "transporter"
+    }
+    
     return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
       
@@ -165,5 +176,8 @@ export class AuthService {
       }
     );
     return this.currentUser;
+  }
+  postDataAPI(any: any){
+    this.serviciosCollection.add(any);
   }
 }
