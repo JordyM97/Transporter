@@ -8,6 +8,7 @@ import {Router} from '@angular/router'
 import { ToastController } from '@ionic/angular';
 //Importar el Loading (Feedback)
 import { LoaderService } from 'src/app/services/loader.service';
+import { AppComponent } from 'src/app/app.component';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class LoginPage implements OnInit {
     public router:Router,
     public toastController: ToastController,
     private ionLoader: LoaderService,
+    private appcom:AppComponent,
   ) { }
 
   ngOnInit() {
@@ -47,13 +49,15 @@ export class LoginPage implements OnInit {
     };
     localStorage.setItem("correo",credentials.username);
     localStorage.setItem("password",credentials.password);
-
     this.authService.login(credentials).then( (result)=>{
       console.log(result)
       console.log(this.authService.token);
       if(result=="ok"){
-        this.authService.sendDeviceToken();
-        console.log("Mandar a tabs")
+        if(this.authService.deviceToken!= null){
+          this.authService.sendDeviceToken();
+        }
+        this.appcom.username=this.authService.nombre;
+        
         this.router.navigate(['tabs'])
       }
       else{

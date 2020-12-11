@@ -44,7 +44,7 @@ import { TerminosCondicionesComponent } from './components/terminos-condiciones/
 export class AppComponent implements OnInit {
    geocoder = new google.maps.Geocoder();
    politicas: Observable<any>;
-
+   username= "Invitado";
   constructor(
     private AFauth: AuthService,
     private platform: Platform,
@@ -58,6 +58,7 @@ export class AppComponent implements OnInit {
     private fcmService: FcmService,
     private httpService: HttpService,
     private modalCtrl:ModalController,
+    private authservice: AuthService,
     // private routerOutlet: IonRouterOutlet,
     //private navParams: NavParams,
 
@@ -79,7 +80,9 @@ export class AppComponent implements OnInit {
       this.fcmService.initPush();
     });
   }
-
+  reload(){
+    this.reload();
+  }
   async presentAlert(identificacion: string) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
