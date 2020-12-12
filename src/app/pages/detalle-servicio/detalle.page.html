@@ -26,13 +26,12 @@
   </div>
 
   <div id="content">
-    <p><strong>Inicio: </strong>{{shareData.inicio}}</p>
-    <p><strong>Fin: </strong>{{shareData.fin}}</p>
-    <p><strong>Fecha: </strong>{{shareData.detalleServicio.data.fecha}}</p>
-    <p><strong>Hora: </strong>{{shareData.detalleServicio.data.hora}}</p>
-    <p><strong>Método de Pago: </strong>{{shareData.detalleServicio.data.metodoPago}}</p>
-    <p><strong>Cliente: </strong>${{shareData.detalleServicio.data.cliente}}</p>
-    <p><strong>Valor: </strong>${{shareData.detalleServicio.data.valor}}</p>
+    <ion-row><strong>Inicio: </strong>{{shareData.inicio}}</ion-row>
+    <ion-row><strong>Fin: </strong>{{shareData.fin}}</ion-row>
+    <ion-row><strong>Fecha y hora: </strong>{{shareData.detalleServicio.data.fecha}} - {{shareData.detalleServicio.data.hora}}</ion-row>
+    <ion-row><strong>Método de Pago: </strong>{{shareData.detalleServicio.data.metodoPago}}</ion-row>
+    <ion-row><strong>Cliente: </strong>{{shareData.detalleServicio.data.cliente}}</ion-row>
+    <ion-row><strong>Valor: </strong>${{shareData.detalleServicio.data.valor}}</ion-row>
   </div>
 
   <div class="botones">
