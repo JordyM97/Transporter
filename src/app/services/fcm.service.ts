@@ -97,8 +97,10 @@ export class FcmService {
           'inicio':origin,
           'fin':destiny,
           'hora':notification.data.hora,
+          'fecha':notification.data.fecha,
           'metodoPago':notification.data.metodoPago,
           'valor':notification.data.valor,
+          'cliente':notification.data.cliente,
         }
 
         this.shareData.nombreNot$.emit(JSON.stringify(notification));
@@ -157,23 +159,27 @@ export class FcmService {
   }
 
   async presentPopoverDetalle(notification) {
-    let title=notification.title;
-    let strInicio= await this.detalle.geocodeLatLng(notification.data.inicio);
-    let strFin= await this.detalle.geocodeLatLng(notification.data.fin);
-    let hora=notification.data.hora;
-    let metodoPago=notification.data.metodoPago;
-    let valor=notification.data.valor;
+    let title = notification.title;
+    let strInicio = await this.detalle.geocodeLatLng(notification.data.inicio);
+    let strFin = await this.detalle.geocodeLatLng(notification.data.fin);
+    let hora = notification.data.hora;
+    let fecha = notification.data.fecha;
+    let metodoPago = notification.data.metodoPago;
+    let valor = notification.data.valor;
+    let cliente = notification.data.cliente;
 
     const popover = await this.popoverController.create({
       component: PopoverDetalleComponent,
       cssClass: 'my-custom-class',
       componentProps:{
-         title:title,
-         inicio:strInicio,
-         fin:strFin,
-         hora:hora,
-         metodoPago:metodoPago,
-         valor:valor
+         title: title,
+         inicio: strInicio,
+         fin: strFin,
+         fecha: fecha,
+         hora: hora,
+         metodoPago: metodoPago,
+         valor: valor,
+         cliente: cliente
       },
       mode:"md",
       translucent: true
