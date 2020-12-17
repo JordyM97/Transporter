@@ -38,9 +38,10 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    if(localStorage.length>0){
+      this.loguinAutomatico();
+    }
   }
-
-
 
   on_submit_login(){
     let credentials= {
@@ -65,6 +66,27 @@ export class LoginPage implements OnInit {
       }
     })
   }
+
+  loguinAutomatico(){
+    let credentials= {
+      username: localStorage.getItem("correo"),
+      password: localStorage.getItem("password")
+    };
+
+    this.authService.login(credentials).then( (result)=>{
+      console.log(result)
+      //console.log(this.authService.token);
+      if(result=="ok"){
+        if(this.authService.deviceToken!= null){
+          this.authService.sendDeviceToken();
+        }
+        this.appcom.username=this.authService.nombre;
+        this.router.navigate(['tabs'])
+      }else{
+        this.presentToastFeedback()
+      }
+    })
+    }
 
   
   async presentToastFeedback() {

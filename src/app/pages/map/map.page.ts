@@ -3,6 +3,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
+import { ServicesDriverService } from 'src/app/services/services-driver.service';
 //import {PopoverInicioFinComponent}from 'src/app/components/popover-inicio-fin/popover-inicio-fin.component';
 declare var google;
 
@@ -23,7 +25,9 @@ export class MapPage implements OnInit,OnDestroy {
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController,
     private alertController: AlertController,
-    public PopoverController:PopoverController
+    private authService: AuthService,
+    private driverService: ServicesDriverService,
+    public PopoverController:PopoverController,
   ) {
 
   }
@@ -33,6 +37,7 @@ export class MapPage implements OnInit,OnDestroy {
   
   ionViewWillEnter(){
    this.loadMap();
+   this.driverService.getUserInfo(this.authService.getId(),this.authService.getToken());
   }
   ngOnInit() {
     //this.watchPosition();

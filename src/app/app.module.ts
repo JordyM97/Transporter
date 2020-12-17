@@ -24,6 +24,7 @@ import {PopoverInicioFinComponent}from 'src/app/components/popover-inicio-fin/po
 import { CallNumber } from '@ionic-native/call-number/ngx';
 
 import { HttpService } from "./services/http.service";
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -39,6 +40,7 @@ import { HttpService } from "./services/http.service";
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     ComponentsModule,
+    ReactiveFormsModule,
 
   ],
   providers: [

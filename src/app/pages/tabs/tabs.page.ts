@@ -14,7 +14,7 @@ export class TabsPage implements OnInit {
   data: any=null;
 
   constructor(
-    private route:ActivatedRoute,
+    private route:ActivatedRoute
   ) { }
 
   ngOnInit() {
