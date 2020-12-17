@@ -66,18 +66,15 @@ export class AppComponent implements OnInit {
     this.initializeApp();
   }
    
-  ngOnInit() {
-    
-  }
-
+  ngOnInit() {}
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-
       //Initializar las PushNotifications
       this.fcmService.initPush();
+      this.router.navigateByUrl("login")
     });
   }
   reload(){

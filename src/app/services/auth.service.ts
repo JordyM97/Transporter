@@ -41,6 +41,25 @@ export class AuthService {
     this.servicios= this.serviciosCollection.valueChanges();
    }
 
+   
+  sendNotification(notificacion){ 
+    console.log(notificacion);
+    return new Promise((resolve, reject) => {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'token '+String(this.token));
+
+    this.http.post('https://axela.pythonanywhere.com/api/acceptService/', notificacion, {headers: headers}) //http://127.0.0.1:8000
+      .subscribe(res => {
+        let data = JSON.parse(JSON.stringify(res));
+        console.log(data);
+        resolve("ok");
+        }, (err) => {
+        console.log(err);
+        //resolve("ok");
+        resolve("bad");
+      });  });
+  }
+
    sendDeviceToken(){
     console.log(this.token);
     console.log(this.deviceToken);
@@ -177,7 +196,16 @@ export class AuthService {
     );
     return this.currentUser;
   }
+
   postDataAPI(any: any){
     this.serviciosCollection.add(any);
+  }
+
+  getToken(){
+    return this.token;
+  }
+
+  getId(){
+    return this.id;
   }
 }

@@ -20,6 +20,7 @@ import { PopoverDetalleComponent } from '../components/popover-detalle/popover-d
 import { DetalleServicioService } from './detalle-servicio.service';
 import { PopoverController } from '@ionic/angular';
 import { AuthService } from './auth.service';
+import { not } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -101,6 +102,7 @@ export class FcmService {
           'metodoPago':notification.data.metodoPago,
           'valor':notification.data.valor,
           'cliente':notification.data.cliente,
+          'idCliente':notification.data.idCliente,
         }
 
         this.shareData.nombreNot$.emit(JSON.stringify(notification));
@@ -167,6 +169,10 @@ export class FcmService {
     let metodoPago = notification.data.metodoPago;
     let valor = notification.data.valor;
     let cliente = notification.data.cliente;
+    let inicioCoords = notification.data.inicio;
+    let finCoords = notification.data.fin;
+    let idCliente = notification.data.idCliente;
+    //let idCliente = notification.data.idCliente;
 
     const popover = await this.popoverController.create({
       component: PopoverDetalleComponent,
@@ -179,7 +185,10 @@ export class FcmService {
          hora: hora,
          metodoPago: metodoPago,
          valor: valor,
-         cliente: cliente
+         cliente: cliente,
+         inicioCoords: inicioCoords,
+         finCoords: finCoords,
+         idCliente: idCliente
       },
       mode:"md",
       translucent: true

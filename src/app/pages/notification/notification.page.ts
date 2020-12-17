@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+
 export interface notification{
   titulo:string;
   cuerpo:string;
@@ -37,7 +39,9 @@ export class NotificationPage implements OnInit {
   ];
 
 
-  constructor() {
+  constructor(
+    public authService: AuthService
+  ) {
     this.notificacionesBD.forEach((not:notification) => {
       
       this.notificacionesShow.push(not);
@@ -49,6 +53,7 @@ export class NotificationPage implements OnInit {
 
 
   ngOnInit() {
+    //console.log(this.authService.getToken())
   }
 
 }
