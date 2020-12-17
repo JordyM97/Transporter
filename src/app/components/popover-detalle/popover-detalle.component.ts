@@ -98,7 +98,7 @@ export class PopoverDetalleComponent implements OnInit {
     formData.append("driver", this.uploadForm.get('driver').value);
     formData.append("client", this.uploadForm.get('client').value);
     formData.append("data", this.uploadForm.get('data').value);
-    //this.authService.sendNotification(formData);
+    this.authService.sendNotification(formData);
   }
   
 }
