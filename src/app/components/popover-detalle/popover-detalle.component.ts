@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup  } from '@angular/forms';
 import { ServicesDriverService } from 'src/app/services/services-driver.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { PopoverMapaComponent } from '../popover-mapa/popover-mapa.component';
 
 @Component({
   selector: 'app-popover-detalle',
@@ -34,7 +35,7 @@ export class PopoverDetalleComponent implements OnInit {
     private formBuilder: FormBuilder,
     private servicesDriver: ServicesDriverService,
     private authService: AuthService
-    ){
+  ){
     this.viajesCliente = [];
     this.title = this.navParams.get("title")
     this.inicio = this.navParams.get("inicio")
@@ -57,6 +58,23 @@ export class PopoverDetalleComponent implements OnInit {
       client: [''],
       data: ['']
     });
+  }
+
+  async btnMapa(){
+    var inicio = this.inicioCoords;
+    var fin = this.finCoords;
+    const popover= await this.popover.create({
+      component: PopoverMapaComponent,
+      translucent: true,
+      cssClass: 'my-custom-modal-class',
+      componentProps:{
+        locations: {
+          inicio: inicio,
+          fin: fin
+        }
+      } 
+    }); 
+    return await popover.present();
   }
 
 
@@ -88,7 +106,7 @@ export class PopoverDetalleComponent implements OnInit {
   enviarNotificacion(data){
     console.log(data)
 
-    this.uploadForm.get('service').setValue(this.idServicio); /*VALOR DE PRUEBA*/
+    this.uploadForm.get('service').setValue(this.idServicio);
     this.uploadForm.get('driver').setValue(this.servicesDriver.getId()); 
     this.uploadForm.get('client').setValue(this.idCliente); 
     this.uploadForm.get('data').setValue(JSON.stringify(data));

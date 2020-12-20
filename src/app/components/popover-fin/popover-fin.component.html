@@ -5,7 +5,16 @@
 
 <ion-content>
   <img class="center" src="assets/icon/proceso_exitoso.png">
-  <p>Ha llegado al final de la ruta</p>  
+  <ion-row>Ha llegado al final de la ruta</ion-row>
+  <ion-row><strong>Cliente:</strong>{{shareData.detalleServicio.data.cliente}}</p></ion-row>
+  <ion-row><strong>Calificación:</strong><ion-icon name="star" *ngFor="let num of [1,2,3,4,5]"(click)="rate(num)" [ngStyle]="{'color':getColor(num)}"></ion-icon></p></ion-row>
+  <ion-row>
+    <ion-item>
+      <ion-label position="stacked"><strong>Comentario</strong></ion-label>
+      <ion-input placeholder="Ingrese un comentario (opcional)"></ion-input>
+    </ion-item>
+  </ion-row>
+    
 
   <ion-button fill="clear" class="btn" expand="full" (click)="finalizarServicio()">Finalizar Servicio</ion-button>
   
