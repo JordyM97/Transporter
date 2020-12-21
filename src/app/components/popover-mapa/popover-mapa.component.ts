@@ -34,7 +34,7 @@ export class PopoverMapaComponent implements OnInit {
     //Crear nuevo mapa
     const mapEle: HTMLElement = document.getElementById('mapaDetalles');
     console.log(mapEle)
-    // Crear el mapa y renderizarlo
+    // Crear el mapa y renderizarlo para ver
     this.map = new google.maps.Map(mapEle, {
       center: JSON.parse(this.locations.inicio),
       zoom: 15,
