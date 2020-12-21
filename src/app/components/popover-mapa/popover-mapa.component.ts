@@ -32,7 +32,7 @@ export class PopoverMapaComponent implements OnInit {
     console.log("SSD")
     console.log(google)
     //Crear nuevo mapa
-    const mapEle: HTMLElement = document.getElementById('mapaDetalles');
+    const mapEle: HTMLElement = document.getElementById('mapaPruebas');
     console.log(mapEle)
     // Crear el mapa y renderizarlo para ver
     this.map = new google.maps.Map(mapEle, {

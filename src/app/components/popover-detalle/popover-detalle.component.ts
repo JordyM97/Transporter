@@ -31,7 +31,7 @@ export class PopoverDetalleComponent implements OnInit {
   constructor(
     private router: Router,
     private navParams: NavParams,
-    private popover:PopoverController,
+    private popovercontroller:PopoverController,
     private formBuilder: FormBuilder,
     private servicesDriver: ServicesDriverService,
     private authService: AuthService
@@ -63,10 +63,9 @@ export class PopoverDetalleComponent implements OnInit {
   async btnMapa(){
     var inicio = this.inicioCoords;
     var fin = this.finCoords;
-    const popover= await this.popover.create({
+    const popoveer= await this.popovercontroller.create({
       component: PopoverMapaComponent,
       translucent: true,
-      cssClass: 'my-custom-class',
       componentProps:{
         locations: {
           inicio: inicio,
@@ -74,7 +73,7 @@ export class PopoverDetalleComponent implements OnInit {
         }
       } 
     }); 
-    return await popover.present();
+    return await popoveer.present();
   }
 
 
@@ -95,12 +94,12 @@ export class PopoverDetalleComponent implements OnInit {
     }
     this.enviarNotificacion(this.notificacionCareApp);
     this.router.navigate(['/detalle']);
-    await this.popover.dismiss();
+    await this.popovercontroller.dismiss();
   }
 
   async btnNo(){
     console.log('Confirm cancel');
-    await this.popover.dismiss();
+    await this.popovercontroller.dismiss();
   }
 
   enviarNotificacion(data){
