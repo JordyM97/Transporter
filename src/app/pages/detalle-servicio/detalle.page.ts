@@ -240,11 +240,11 @@ export class DetallePage implements OnInit,OnDestroy {
     const popover = await this.popoverController.create({
       component: PopoverFinComponent,
       cssClass: 'notification-class',
-      /*componentProps:{
+      componentProps:{
          title:"FIN DEL SERVICIO",
          body:"Ha llegado al final de la ruta",
          btn:" Finalizar Servicio" 
-      },*/
+      },
       mode:"md",
       translucent: true
     });

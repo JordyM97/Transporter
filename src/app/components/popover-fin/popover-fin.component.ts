@@ -67,7 +67,12 @@ export class PopoverFinComponent implements OnInit {
       //this.detalle.geocodeLatLng();          
       this.bloquearFin();
       await this.popover.dismiss();
-      this.router.navigate(['/tabs']);    
+      if(this.rating!= null){
+        this.router.navigate(['/tabs']); 
+      }
+      else{
+        console.log("Elije rating")
+      }   
   }
 
   rate(index: number){

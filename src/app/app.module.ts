@@ -18,7 +18,9 @@ import {AngularFireAuthModule} from '@angular/fire/auth'
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LaunchNavigator } from '@ionic-native/launch-navigator/ngx';
 import { ComponentsModule } from './components/components.module';
-import {PopoverInicioFinComponent}from 'src/app/components/popover-inicio-fin/popover-inicio-fin.component';
+import { PopoverInicioFinComponent }from 'src/app/components/popover-inicio-fin/popover-inicio-fin.component';
+import { PopoverFinComponent } from 'src/app/components/popover-fin/popover-fin.component';
+import { PopoverMapaComponent } from 'src/app/components/popover-mapa/popover-mapa.component';
 
 //Para usar llamadas nativas
 import { CallNumber } from '@ionic-native/call-number/ngx';
@@ -30,8 +32,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [AppComponent, PopoverInicioFinComponent],
-  entryComponents: [PopoverInicioFinComponent],
+  declarations: [AppComponent, PopoverInicioFinComponent, PopoverFinComponent, PopoverMapaComponent],
+  entryComponents: [PopoverInicioFinComponent, PopoverFinComponent, PopoverMapaComponent],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 
