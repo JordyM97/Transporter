@@ -66,6 +66,7 @@ export class PopoverDetalleComponent implements OnInit {
     const popoveer= await this.popovercontroller.create({
       component: PopoverMapaComponent,
       translucent: true,
+      cssClass: 'fullscreen',
       componentProps:{
         locations: {
           inicio: inicio,
