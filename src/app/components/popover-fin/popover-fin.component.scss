@@ -1,9 +1,19 @@
 ion-icon {
-    font-size: 14px;
+    font-size: 34px;
 }
 div{
     --width: 100%;
     --height: 80%;
     height: 80%;
     width: 100%;
+}
+.notification-class {
+    --height: 65vh;
+    --width: 75vw;
+}
+#score{
+    padding-top: 10px;
+}
+ion-row{
+    padding-bottom: 13px;
 }
