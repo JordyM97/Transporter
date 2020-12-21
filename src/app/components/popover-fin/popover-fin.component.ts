@@ -62,14 +62,14 @@ export class PopoverFinComponent implements OnInit {
   }*/ 
 
   async finalizarServicio(){
-    if(this.rating != null){
       console.log('CARRERA FINALIZADA');
       this.stopWatch();
       //this.detalle.geocodeLatLng();          
       this.bloquearFin();
       await this.popover.dismiss();
-      this.router.navigate(['/tabs']);
-    }
+      if(this.rating != null){
+        this.router.navigate(['/tabs']);
+      }
     else{
       console.log("Por favor, elija una calificacion")
     }    

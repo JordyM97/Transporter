@@ -66,7 +66,7 @@ export class PopoverDetalleComponent implements OnInit {
     const popover= await this.popover.create({
       component: PopoverMapaComponent,
       translucent: true,
-      cssClass: 'my-custom-modal-class',
+      cssClass: 'my-custom-class',
       componentProps:{
         locations: {
           inicio: inicio,
