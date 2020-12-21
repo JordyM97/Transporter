@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, PopoverController } from '@ionic/angular';
+import { ModalController, NavParams, PopoverController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup  } from '@angular/forms';
 import { ServicesDriverService } from 'src/app/services/services-driver.service';
@@ -34,7 +34,8 @@ export class PopoverDetalleComponent implements OnInit {
     private popovercontroller:PopoverController,
     private formBuilder: FormBuilder,
     private servicesDriver: ServicesDriverService,
-    private authService: AuthService
+    private authService: AuthService,
+    public modalController: ModalController
   ){
     this.viajesCliente = [];
     this.title = this.navParams.get("title")
@@ -60,6 +61,22 @@ export class PopoverDetalleComponent implements OnInit {
     });
   }
 
+  async btnMapa() {
+    var inicio = this.inicioCoords;
+    var fin = this.finCoords;
+    const modal = await this.modalController.create({
+      component: PopoverMapaComponent,
+      cssClass: 'my-custom-class',
+      componentProps:{
+        locations: {
+          inicio: inicio,
+          fin: fin
+        }
+      } 
+    }); 
+    return await modal.present();
+  }
+/*
   async btnMapa(){
     var inicio = this.inicioCoords;
     var fin = this.finCoords;
@@ -75,7 +92,7 @@ export class PopoverDetalleComponent implements OnInit {
       } 
     }); 
     return await popoveer.present();
-  }
+  }*/
 
 
   async btnSi(){

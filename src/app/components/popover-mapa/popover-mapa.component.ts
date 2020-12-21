@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, PopoverController, ToastController } from '@ionic/angular';
+import { ModalController, NavParams, PopoverController, ToastController } from '@ionic/angular';
 
 declare var google;
 
@@ -18,8 +18,9 @@ export class PopoverMapaComponent implements OnInit {
 
   constructor(
     private navParams: NavParams,
-    private popoverController: PopoverController,
-    public toastController: ToastController,
+    private modalCtrl: ModalController,
+    //private popoverController: PopoverController,
+    //public toastController: ToastController,
   ) { }
 
   ngOnInit() {
@@ -60,15 +61,12 @@ export class PopoverMapaComponent implements OnInit {
       }
     });
   }
-
-  async DismissClick() {
-    await this.popoverController.dismiss();
-    const toast = await this.toastController.create({
-      message: '¿Vas cambiar algo?',
-      duration: 2500,
-      position: 'top',
-      color: 'danger'
-      });
-    toast.present();
+  
+  async dismissClick() {
+    // using the injected ModalController this page
+    // can "dismiss" itself and optionally pass back data
+    this.modalCtrl.dismiss({
+      'dismissed': true
+    });
   }
 }
