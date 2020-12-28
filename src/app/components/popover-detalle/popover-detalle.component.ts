@@ -52,7 +52,7 @@ export class PopoverDetalleComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.servicesDriver.getRecordClient(this.idCliente,this.authService.getToken());
+    this.servicesDriver.getRecordClient(this.idCliente,localStorage.getItem("token"));
     this.uploadForm = this.formBuilder.group({
       service: [''],
       driver: [''],
