@@ -74,7 +74,7 @@ export class FcmService {
         this.authService.deviceToken=this.as;
         //alert('Push registration success, token: ' + token.value);
         //console.log(token)
-        this.authService.postDataAPI(this.as);
+        //this.authService.postDataAPI(this.as);
         
       }
     );
@@ -103,7 +103,7 @@ export class FcmService {
           'metodoPago':notification.data.metodoPago,
           'valor':notification.data.valor,
           'cliente':notification.data.cliente,
-          'idCliente':notification.data.idCliente,
+          'idCliente':notification.data.idCliente
         }
 
         this.shareData.nombreNot$.emit(JSON.stringify(notification));
@@ -145,7 +145,7 @@ export class FcmService {
               'metodoPago':notification.notification.data.metodoPago,
               'valor':notification.notification.data.valor,
               'cliente':notification.notification.data.cliente,
-              'idCliente':notification.notification.data.idCliente,
+              'idCliente':notification.notification.data.idCliente
             }
            
   

@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 
 //Para usar llamadas nativas
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { ChatScreenComponent } from 'src/app/components/chat-screen/chat-screen.component';
+import { ChatService } from 'src/app/services/chat.service';
 
 declare var google;
 
@@ -55,6 +57,7 @@ export class DetallePage implements OnInit,OnDestroy {
     private detalle:DetalleServicioService,
     public popoverController: PopoverController,
     private callNumber: CallNumber,
+    private chatService: ChatService
     ) {
   }
   ngOnDestroy(){
@@ -142,6 +145,7 @@ export class DetallePage implements OnInit,OnDestroy {
         console.log("latitud "+ lat);
         console.log("longitud "+ lng);
         let latLng=new google.maps.LatLng(lat,lng);
+        this.chatService.addPosition("1",JSON.stringify(latLng))
         this.marker = new google.maps.Marker({
           map: this.mapa,
           icon: new google.maps.MarkerImage('https://maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',

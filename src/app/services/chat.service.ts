@@ -20,7 +20,8 @@ export class ChatService {
   public messages: Observable<any[]>;
 
 
-
+  private locationCollection: AngularFirestoreCollection<any>;
+  public locations: Observable<any[]>;
 
   constructor(
     private afs: AngularFirestore,
@@ -29,7 +30,8 @@ export class ChatService {
   ) {
     this.chatCollection = this.afs.collection<any>('chatRoomsTest');
     this.chatRooms = this.chatCollection.snapshotChanges();
-
+    this.locationCollection = this.afs.collection<any>('location');
+    this.locations= this.chatCollection.snapshotChanges();
    }
 
   getChatRooms(){
@@ -63,7 +65,16 @@ export class ChatService {
     this.messagesCollection = this.afs.collection<any>(`/chatRoomsTest/${chatRoom}/messages`,(ref)=>ref.orderBy('createdAt'));
     return this.messagesCollection.valueChanges();
   }
-
+  addPosition(id:string,location:string){
+    return this.afs.collection(`/posicion/${id}/hist`).add(
+      {
+        location: location ,
+        from: this.authService.nombre,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }
+    );
+  
+  }
   addChatMessage(chatRoom:string,msg:string){
     return this.afs.collection(`/chatRoomsTest/${chatRoom}/messages`).add(
       {
