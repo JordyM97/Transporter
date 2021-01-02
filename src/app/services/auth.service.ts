@@ -118,6 +118,7 @@ export class AuthService {
             let data = JSON.parse(JSON.stringify(res));
             this.id=data.id;
             this.token = data.token;
+            localStorage.setItem("token",data.token); //Local Storage para el token
             this.nombre = data.first_name;
             this.apellido = data.last_name;
             this.correo = data.email;
@@ -138,6 +139,7 @@ export class AuthService {
    * @returns una promesa 
    */
   logout() {
+    localStorage.clear();
     return this.AFauth.signOut()
       .then(() => {
         this.router.navigate(['/login'])

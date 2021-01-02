@@ -3,11 +3,11 @@ import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-na
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AlertController } from '@ionic/angular';
 import { PopoverController, } from '@ionic/angular';
-import {PopoverInicioFinComponent}from 'src/app/components/popover-inicio-fin/popover-inicio-fin.component';
-import {PopoverFinComponent}from 'src/app/components/popover-fin/popover-fin.component';
+import { PopoverInicioFinComponent }from 'src/app/components/popover-inicio-fin/popover-inicio-fin.component';
+import { PopoverFinComponent }from 'src/app/components/popover-fin/popover-fin.component';
 //Servicio para compartir data
 import { ShareDataService } from 'src/app/services/share-data.service';
-import{DetalleServicioService} from 'src/app/services/detalle-servicio.service';
+import{ DetalleServicioService } from 'src/app/services/detalle-servicio.service';
 import { Subscription } from 'rxjs';
 
 import { Router } from '@angular/router';
