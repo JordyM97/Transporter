@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { Plugins } from '@capacitor/core';
+import { PhotoCameraService } from 'src/app/services/photo-camera.service';
 const {PushNotifications} = Plugins;
 
 @Component({
@@ -14,7 +15,8 @@ export class TabsPage implements OnInit {
   data: any=null;
 
   constructor(
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    public photoService: PhotoCameraService
   ) { }
 
   ngOnInit() {
@@ -25,7 +27,9 @@ export class TabsPage implements OnInit {
       }
     )
   }
-
+  addPhotoToGallery() {
+    this.photoService.addNewToGallery();
+  }
   resetBadgeCount(){
     PushNotifications.removeAllDeliveredNotifications();
   }

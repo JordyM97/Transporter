@@ -131,30 +131,39 @@ export class FcmService {
           let isCompleteRouter = await this.router.navigateByUrl(`/tabs/${notification.notification.data}`)
           if(isCompleteRouter){
             console.log('LLEGO A LA TABS')
-          //   let origin=JSON.parse(notification.notification.data.inicio);
-          //   console.log('Inicio> ',typeof(origin))//object
-          //   console.log('Inicio> ',typeof(origin.lat))
-          //   let destiny=JSON.parse(notification.notification.data.fin);
-          //   console.log('Fin> ',typeof(destiny.lng))
+             let origin=JSON.parse(notification.notification.data.inicio);
+             console.log('Inicio> ',typeof(origin))//object
+             console.log('Inicio> ',typeof(origin.lat))
+             let destiny=JSON.parse(notification.notification.data.fin);
+             console.log('Fin> ',typeof(destiny.lng))
+             let notObjeto = {
+              'title':notification.notification.title,
+              'inicio':origin,
+              'fin':destiny,
+              'hora':notification.notification.data.hora,
+              'fecha':notification.notification.data.fecha,
+              'metodoPago':notification.notification.data.metodoPago,
+              'valor':notification.notification.data.valor,
+              'cliente':notification.notification.data.cliente,
+              'idCliente':notification.notification.data.idCliente,
+            }
+           
   
-          // let notObjeto = {
-          //   'title':notification.notification.title,
-          //   'inicio':origin,
-          //   'fin':destiny,
-          //   'hora':notification.notification.data.hora,
-          //   'metodoPago':notification.notification.data.metodoPago,
-          //   'valor':notification.notification.data.valor,
-          // }
-  
-         
-          // this.shareData.notificacion=notification;
-          // this.shareData.detalleServicio=notification;
-          // this.presentPopoverDetalle(notification);
+            this.shareData.nombreNot$.emit(JSON.stringify(notification.notification));
+
+            this.shareData.notObj$.emit(notObjeto);
+    
+            this.shareData.notificacion = notification.notification;
+            this.shareData.detalleServicio=notification.notification;
+            //this.presentAlertConfirm(notification);
+            this.shareData.inicio=await this.detalle.geocodeLatLng(notification.notification.data.inicio);
+            this.shareData.fin=await this.detalle.geocodeLatLng(notification.notification.data.fin);
+          this.presentPopoverDetalle(notification.notification);
           }
           
         }
         else{
-
+            console.log("no data in noti")
         }
       }
     );

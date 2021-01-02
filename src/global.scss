@@ -75,7 +75,9 @@
 
     
   }
-
+  .mapa-popover{
+    --width:100vw;
+  }
   .my-custom-class{
     --width:75vw;
     #header-card{
@@ -145,7 +147,7 @@
 
 
   .notification-class{
-    --height:45vh;
+    --height:65vh;
     --width:75vw;
     #header-card{
       

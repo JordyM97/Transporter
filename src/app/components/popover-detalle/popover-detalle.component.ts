@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup  } from '@angular/forms';
 import { ServicesDriverService } from 'src/app/services/services-driver.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { PopoverMapaComponent } from '../popover-mapa/popover-mapa.component';
-
 @Component({
   selector: 'app-popover-detalle',
   templateUrl: './popover-detalle.component.html',
@@ -52,6 +51,7 @@ export class PopoverDetalleComponent implements OnInit {
    }
 
   ngOnInit() {
+    
     this.servicesDriver.getRecordClient(this.idCliente,this.authService.getToken());
     this.uploadForm = this.formBuilder.group({
       service: [''],
@@ -60,13 +60,31 @@ export class PopoverDetalleComponent implements OnInit {
       data: ['']
     });
   }
+  loguinAutomatico(){
+    let credentials= {
+      username: localStorage.getItem("correo"),
+      password: localStorage.getItem("password")
+    };
 
+    this.authService.login(credentials).then( (result)=>{
+      console.log(result)
+      //console.log(this.authService.token);
+      if(result=="ok"){
+        if(this.authService.deviceToken!= null){
+          this.authService.sendDeviceToken();
+        }
+
+      }else{
+        
+      }
+    })
+    }
   async btnMapa() {
     var inicio = this.inicioCoords;
     var fin = this.finCoords;
     const modal = await this.modalController.create({
       component: PopoverMapaComponent,
-      cssClass: 'my-custom-class',
+      cssClass: 'mapa-popover',
       componentProps:{
         locations: {
           inicio: inicio,
@@ -96,8 +114,19 @@ export class PopoverDetalleComponent implements OnInit {
 
 
   async btnSi(){
+    this.loguinAutomatico();
+    console.log(this.idCliente);
+    console.log(this.authService.getToken());
+    this.servicesDriver.getRecordClient(this.idCliente,this.authService.getToken());
+    this.uploadForm = this.formBuilder.group({
+      service: [''],
+      driver: [''],
+      client: [''],
+      data: ['']
+    });
     console.log('Confirm Okay');
     this.viajesCliente = this.servicesDriver.getRecordC();
+    console.log(this.viajesCliente)
     this.idServicio = this.viajesCliente.pop().idService /*Conseguimos el ultimo id del servicio*/
     this.notificacionCareApp = {  /*VALOR DE PRUEBA*/
       nombreConductor: this.servicesDriver.getName(),

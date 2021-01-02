@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
 
 import { AuthService } from "../services/auth.service";
+import { PhotoCameraService } from '../services/photo-camera.service';
 
 export interface notification{
   titulo:string;
@@ -48,6 +49,7 @@ export class HomePage implements OnInit {
     private AFauth: AuthService,
     public platform: Platform,
     public router: Router,
+    public photoService: PhotoCameraService,
   ) {
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.router.navigateByUrl('Home')
@@ -63,6 +65,9 @@ export class HomePage implements OnInit {
         this.notificacionesShow.push(not);
       
     });
+  }
+  addPhotoToGallery() {
+    this.photoService.addNewToGallery();
   }
 
   on_logout(){
