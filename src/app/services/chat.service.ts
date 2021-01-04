@@ -66,15 +66,22 @@ export class ChatService {
     return this.messagesCollection.valueChanges();
   }
   addPosition(id:string,location:string){
-    return this.afs.collection(`/posicion/${id}/hist`).add(
-      {
-        location: location ,
-        from: this.authService.nombre,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    this.afs.collection(`/posicion/${id}`, ref => ref.where('id', "==", id)).snapshotChanges().subscribe(res => {
+      if (res.length > 0)      {
+        this.afs.doc(`/posicion/${id}`).set({ location: location }, { merge: true });
       }
-    );
-  
+      else{
+        this.afs.doc(`/posicion/${id}`).update(
+          {
+            location: location ,
+            from: this.authService.nombre,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          }
+        );
+      }
+  });  
   }
+ 
   addChatMessage(chatRoom:string,msg:string){
     return this.afs.collection(`/chatRoomsTest/${chatRoom}/messages`).add(
       {
