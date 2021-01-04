@@ -16,6 +16,8 @@ import { Router } from '@angular/router';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { ChatScreenComponent } from 'src/app/components/chat-screen/chat-screen.component';
 import { ChatService } from 'src/app/services/chat.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 declare var google;
 
@@ -49,6 +51,10 @@ export class DetallePage implements OnInit,OnDestroy {
   notObj: object={};
   notObjSub: Subscription;
 
+  notificacionCalificar: FormGroup;
+
+  notificacionCareApp;
+
   constructor(
     private geolocation: Geolocation,
     public alertController: AlertController,
@@ -57,7 +63,9 @@ export class DetallePage implements OnInit,OnDestroy {
     private detalle:DetalleServicioService,
     public popoverController: PopoverController,
     private callNumber: CallNumber,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private formBuilder: FormBuilder,
+    private authService: AuthService
     ) {
   }
   ngOnDestroy(){
@@ -74,9 +82,15 @@ export class DetallePage implements OnInit,OnDestroy {
 
 
   ngOnInit(){
-  //  this.loadMap();
+    //this.loadMap();
     //this.watchPosition();
     //window.location.reload()
+    this.notificacionCalificar = this.formBuilder.group({
+      service: [''],
+      driver: [''],
+      client: [''],
+      data: ['']
+    });
   } 
 
   callByCellphone(){
@@ -160,6 +174,8 @@ export class DetallePage implements OnInit,OnDestroy {
       }
     })
   } 
+
+  /*
   async confirmarServicio() {
     const alert = await this.alertController.create({
       cssClass: 'notification-class',
@@ -209,7 +225,7 @@ export class DetallePage implements OnInit,OnDestroy {
     });
 
     await alert.present();
-  }
+  }*/
 
   private bloquearInicio(){
     (<HTMLInputElement> document.getElementById("confirmar")).disabled = true;
@@ -241,6 +257,10 @@ export class DetallePage implements OnInit,OnDestroy {
   }
 
   async presentPopoverFin() {
+    this.notificacionCareApp = {  /*VALOR DE PRUEBA*/
+      tipoNotificacion: '1' //Indica si es noti de inicio o fin de carrera; 0=inicio 1=finCalificar
+    }
+    this.enviarNotificacion(this.notificacionCareApp);
     const popover = await this.popoverController.create({
       component: PopoverFinComponent,
       cssClass: 'notification-class',
@@ -253,6 +273,26 @@ export class DetallePage implements OnInit,OnDestroy {
       translucent: true
     });
     return await popover.present();
+  }
+
+  enviarNotificacion(data){
+    console.log(data)
+
+    this.notificacionCalificar.get('service').setValue(localStorage.getItem("idServicio"));
+    this.notificacionCalificar.get('driver').setValue(localStorage.getItem("idConductor")); 
+    this.notificacionCalificar.get('client').setValue(localStorage.getItem("idCliente")); 
+    this.notificacionCalificar.get('data').setValue(JSON.stringify(data));
+
+    localStorage.removeItem("idCliente");
+    localStorage.removeItem("idConductor");
+    localStorage.removeItem("idServicio");
+
+    var formData: any = new FormData();
+    formData.append("service", this.notificacionCalificar.get('service').value);
+    formData.append("driver", this.notificacionCalificar.get('driver').value);
+    formData.append("client", this.notificacionCalificar.get('client').value);
+    formData.append("data", this.notificacionCalificar.get('data').value);
+    this.authService.sendNotification(formData);
   }
   
   

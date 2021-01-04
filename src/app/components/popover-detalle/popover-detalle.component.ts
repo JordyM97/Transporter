@@ -59,25 +59,6 @@ export class PopoverDetalleComponent implements OnInit {
       data: ['']
     });
   }
-  loguinAutomatico(){
-    let credentials= {
-      username: localStorage.getItem("correo"),
-      password: localStorage.getItem("password")
-    };
-
-    this.authService.login(credentials).then( (result)=>{
-      console.log(result)
-      //console.log(this.authService.token);
-      if(result=="ok"){
-        if(this.authService.deviceToken!= null){
-          this.authService.sendDeviceToken();
-        }
-
-      }else{
-        
-      }
-    })
-    }
   async btnMapa() {
     var inicio = this.inicioCoords;
     var fin = this.finCoords;
@@ -93,40 +74,27 @@ export class PopoverDetalleComponent implements OnInit {
     }); 
     return await modal.present();
   }
-/*
-  async btnMapa(){
-    var inicio = this.inicioCoords;
-    var fin = this.finCoords;
-    const popoveer= await this.popovercontroller.create({
-      component: PopoverMapaComponent,
-      translucent: true,
-      cssClass: 'fullscreen',
-      componentProps:{
-        locations: {
-          inicio: inicio,
-          fin: fin
-        }
-      } 
-    }); 
-    return await popoveer.present();
-  }*/
-
 
   async btnSi(){
-    this.loguinAutomatico();
     console.log(this.idCliente);
     console.log(this.authService.getToken());
-    this.servicesDriver.getRecordClient(this.idCliente,this.authService.getToken());
+    /*this.servicesDriver.getRecordClient(this.idCliente,this.authService.getToken());
     this.uploadForm = this.formBuilder.group({
       service: [''],
       driver: [''],
       client: [''],
       data: ['']
-    });
+    });*/
     console.log('Confirm Okay');
     this.viajesCliente = this.servicesDriver.getRecordC();
     console.log(this.viajesCliente)
     this.idServicio = this.viajesCliente.pop().idService /*Conseguimos el ultimo id del servicio*/
+
+    //Almacenamiento local de variables para notificaciones
+    localStorage.setItem("idCliente",this.idCliente);
+    localStorage.setItem("idConductor",this.servicesDriver.getId());
+    localStorage.setItem("idServicio",this.idServicio);
+
     this.notificacionCareApp = {  /*VALOR DE PRUEBA*/
       nombreConductor: this.servicesDriver.getName(),
       apellidoConductor: this.servicesDriver.getLastName(),
@@ -136,7 +104,8 @@ export class PopoverDetalleComponent implements OnInit {
       placaVehiculo: this.servicesDriver.getBrand(),
       colorVehiculo: this.servicesDriver.getColor(),
       inicioCoords: this.inicioCoords,
-      finCoords: this.finCoords
+      finCoords: this.finCoords,
+      tipoNotificacion: '0' //Indica si es noti de inicio o fin de carrera; 0=inicio 1=finCalificar
     }
     this.enviarNotificacion(this.notificacionCareApp);
     this.router.navigate(['/detalle']);
@@ -151,9 +120,9 @@ export class PopoverDetalleComponent implements OnInit {
   enviarNotificacion(data){
     console.log(data)
 
-    this.uploadForm.get('service').setValue(this.idServicio);
-    this.uploadForm.get('driver').setValue(this.servicesDriver.getId()); 
-    this.uploadForm.get('client').setValue(this.idCliente); 
+    this.uploadForm.get('service').setValue(localStorage.getItem("idServicio"));
+    this.uploadForm.get('driver').setValue(localStorage.getItem("idConductor")); 
+    this.uploadForm.get('client').setValue(localStorage.getItem("idCliente")); 
     this.uploadForm.get('data').setValue(JSON.stringify(data));
 
     var formData: any = new FormData();
