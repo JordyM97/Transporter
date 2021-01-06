@@ -8,7 +8,7 @@ import { PopoverFinComponent }from 'src/app/components/popover-fin/popover-fin.c
 //Servicio para compartir data
 import { ShareDataService } from 'src/app/services/share-data.service';
 import{ DetalleServicioService } from 'src/app/services/detalle-servicio.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { Router } from '@angular/router';
 
@@ -18,7 +18,9 @@ import { ChatScreenComponent } from 'src/app/components/chat-screen/chat-screen.
 import { ChatService } from 'src/app/services/chat.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
+import * as firebase from 'firebase';
 declare var google;
 
 @Component({
@@ -32,7 +34,7 @@ export class DetallePage implements OnInit,OnDestroy {
   mapa=null;
   marker=null;
   watch:any;
-
+  markerC=null;
   //Numero del Cliente, debe llegar en la notificacion
   numberClient:string = "0989878654";
 
@@ -54,7 +56,8 @@ export class DetallePage implements OnInit,OnDestroy {
   notificacionCalificar: FormGroup;
 
   notificacionCareApp;
-
+  locationCollection: AngularFirestoreCollection<any>;
+  location: Observable<any[]>
   constructor(
     private geolocation: Geolocation,
     public alertController: AlertController,
@@ -65,8 +68,32 @@ export class DetallePage implements OnInit,OnDestroy {
     private callNumber: CallNumber,
     private chatService: ChatService,
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private firestore: AngularFirestore
     ) {
+    this.markerC=new google.maps.Marker({
+      map: this.mapa ,
+      icon: new google.maps.MarkerImage('https://www.google.com/url?sa=i&url=https%3A%2F%2Ficon-icons.com%2Fes%2Ficono%2FEl-usuario-cliente-personas%2F111213&psig=AOvVaw07q2gJNoivqOoT_aZ1xqs5&ust=1609945530883000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKjzjtGIhe4CFQAAAAAdAAAAABAE',
+       new google.maps.Size(22, 22),
+       new google.maps.Point(0, 18),
+       new google.maps.Point(11, 11))
+     });
+    this.locationCollection=firestore.collection(`/posicion`);//.collection('hist')doc('1')
+
+    this.location= this.locationCollection.valueChanges();
+    this.location.subscribe(value =>{
+      value.forEach(user=>{
+        if(user.id='24'){
+          const mark={
+            lat:user.location.lat,
+            lng: user.location.lng
+          }
+          this.markerC.setPosition(mark)
+          //console.log(user.location.lat)
+          //console.log(user.location.lng)
+        }
+      })
+    });
   }
   ngOnDestroy(){
     console.log("*** DESTROY DETALLESS")
@@ -159,7 +186,7 @@ export class DetallePage implements OnInit,OnDestroy {
         console.log("latitud "+ lat);
         console.log("longitud "+ lng);
         let latLng=new google.maps.LatLng(lat,lng);
-        this.chatService.addPosition("1",JSON.stringify(latLng))
+        this.addPosition(this.authService.id,JSON.stringify(latLng))
         this.marker = new google.maps.Marker({
           map: this.mapa,
           icon: new google.maps.MarkerImage('https://maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
@@ -174,7 +201,24 @@ export class DetallePage implements OnInit,OnDestroy {
       }
     })
   } 
-
+  addPosition(id:string,location:string){
+    var ref=this.firestore.doc(`posicion/${id}`);
+    ref.get().subscribe(doc =>{
+      if(doc.exists){
+        ref.update({
+            location: location ,
+            id: id,
+            from: this.authService.nombre,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          })
+      }else{
+        ref.set({ location: location , id:id,
+          from: this.authService.nombre,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
+      }
+    })
+     
+  }
   /*
   async confirmarServicio() {
     const alert = await this.alertController.create({
