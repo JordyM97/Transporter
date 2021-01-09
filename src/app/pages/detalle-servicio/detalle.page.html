@@ -39,7 +39,23 @@
     <ion-button expand="full" id="finalizar" (click)="presentPopoverFin()" disabled>FINALIZAR</ion-button>
   </div>
 
-  <!-- fab que contiene los botones para chat y llamada -->
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="light">
+      <ion-icon name="share"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="primary">
+        <ion-icon name="chatbubble-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    
+    <ion-fab-list side="start">
+      <ion-fab-button color="light" (click)="addPhotoToGallery()">
+        <ion-icon name="call-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  <!-- fab que contiene los botones para chat y llamada 
   <ion-fab vertical="center" horizontal="end" slot="fixed" color="tertiary">
     <ion-fab-button id="chatbubble" (click)="chatWithClient()">
       <ion-icon name="chatbubble-outline"></ion-icon>
@@ -55,5 +71,5 @@
       <ion-badge slot="end">22</ion-badge>
     </ion-item>
   </ion-fab>
-
+-->
 </ion-content>

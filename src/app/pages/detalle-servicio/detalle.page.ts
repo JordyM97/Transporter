@@ -18,7 +18,7 @@ import { ChatScreenComponent } from 'src/app/components/chat-screen/chat-screen.
 import { ChatService } from 'src/app/services/chat.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import * as firebase from 'firebase';
 declare var google;
@@ -49,7 +49,7 @@ export class DetallePage implements OnInit,OnDestroy {
   nombreNot: string ="";
   nombreNotSubs: Subscription;
 
-
+  markerD:any;
   notObj: object={};
   notObjSub: Subscription;
 
@@ -58,6 +58,8 @@ export class DetallePage implements OnInit,OnDestroy {
   notificacionCareApp;
   locationCollection: AngularFirestoreCollection<any>;
   location: Observable<any[]>
+  Position: AngularFirestoreDocument<any>;
+  PositionD: Observable<any>;
   constructor(
     private geolocation: Geolocation,
     public alertController: AlertController,
@@ -105,6 +107,7 @@ export class DetallePage implements OnInit,OnDestroy {
   ionViewWillEnter(){
     this.loadMap();
     this.watchPosition();
+    this.watchDriverCli(24)
   }
 
 
@@ -189,10 +192,8 @@ export class DetallePage implements OnInit,OnDestroy {
         this.addPosition(this.authService.id,JSON.stringify(latLng))
         this.marker = new google.maps.Marker({
           map: this.mapa,
-          icon: new google.maps.MarkerImage('https://maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
-          new google.maps.Size(22, 22),
-          new google.maps.Point(0, 18),
-          new google.maps.Point(11, 11)),
+          icon: new google.maps.MarkerImage('assets/icon/pointer_proveed.png',null,null,null,
+          new google.maps.Size(34, 45)), 
           position: latLng      
         });
       }
@@ -218,6 +219,25 @@ export class DetallePage implements OnInit,OnDestroy {
       }
     })
      
+  }
+  watchDriverCli(id: any){
+    this.PositionD= this.firestore.doc(`/posicion/${id}`).valueChanges()
+    
+    this.PositionD.subscribe(val=>{ 
+      console.log(val.location)
+      const myLatLng = {
+        lat: JSON.parse(val.location).lat,
+        lng: JSON.parse(val.location).lng
+      };
+      this.markerD=  new google.maps.Marker({
+        map: this.mapa ,
+        icon: new google.maps.MarkerImage('https://maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
+        new google.maps.Size(22, 22),
+        new google.maps.Point(0, 18),
+        new google.maps.Point(11, 11)),  
+        position: myLatLng  
+       });
+      })
   }
   /*
   async confirmarServicio() {

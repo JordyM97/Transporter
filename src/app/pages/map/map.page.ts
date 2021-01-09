@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
@@ -6,6 +7,8 @@ import { PopoverController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { ServicesDriverService } from 'src/app/services/services-driver.service';
 //import {PopoverInicioFinComponent}from 'src/app/components/popover-inicio-fin/popover-inicio-fin.component';
+
+import * as firebase from 'firebase';
 declare var google;
 
 //Servicio para compartir data
@@ -21,6 +24,7 @@ export class MapPage implements OnInit,OnDestroy {
   map = null;
   status=false;
   marker=null;
+  watch:any
   constructor(
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController,
@@ -28,6 +32,7 @@ export class MapPage implements OnInit,OnDestroy {
     private authService: AuthService,
     private driverService: ServicesDriverService,
     public PopoverController:PopoverController,
+    public firestore: AngularFirestore
   ) {
 
   }
@@ -40,6 +45,7 @@ export class MapPage implements OnInit,OnDestroy {
    this.driverService.getUserInfo(this.authService.getId(),this.authService.getToken());
   }
   ngOnInit() {
+    this.watchPosition();
     //this.watchPosition();
     //this.loadMap();
   }
@@ -69,6 +75,7 @@ export class MapPage implements OnInit,OnDestroy {
   //Agrega un marcador al punto que se le pasa y lo dibuja en el mapa, recibe los paramatros de latitud y longitud
   private addMaker(lat: number, lng: number) {
     const marker = new google.maps.Marker({
+      icon: 'assets/icon/pointer_proveed.png',
       position: { lat, lng },
       map: this.map,
       title: 'Transporter'
@@ -86,7 +93,52 @@ export class MapPage implements OnInit,OnDestroy {
       lng: myPosition.coords.longitude
     };
   }
-
+  private watchPosition(){
+    this.watch= this.geolocation.watchPosition();
+    this.watch.subscribe((data)=>{
+      if(this.marker!=null){
+        this.marker.setMap(null);
+        console.log("entro");
+      }
+      if ("coords" in data){
+        let lat=data.coords.latitude;
+        let lng=data.coords.longitude;
+        console.log("latitud "+ lat);
+        console.log("longitud "+ lng);
+        let latLng=new google.maps.LatLng(lat,lng);
+        this.addPosition(this.authService.id,JSON.stringify(latLng))
+        this.marker = new google.maps.Marker({
+          map: this.map,
+          icon: new google.maps.MarkerImage('assets/icon/pointer_proveedor.png',
+          new google.maps.Size(22, 22),
+          new google.maps.Point(0, 28),
+          new google.maps.Point(21, 21)),
+          position: latLng      
+        });
+      }
+      else {
+        console.log("ERROR WATCH POSITION");
+      }
+    })
+  } 
+  addPosition(id:string,location:string){
+    var ref=this.firestore.doc(`posicion/${id}`);
+    ref.get().subscribe(doc =>{
+      if(doc.exists){
+        ref.update({
+            location: location ,
+            id: id,
+            from: this.authService.nombre,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          })
+      }else{
+        ref.set({ location: location , id:id,
+          from: this.authService.nombre,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
+      }
+    })
+     
+  }
   /*private watchPosition(){
     let watch= this.geolocation.watchPosition();
     watch.subscribe((data)=>{
