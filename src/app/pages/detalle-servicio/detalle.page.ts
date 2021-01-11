@@ -284,7 +284,7 @@ export class DetallePage implements OnInit,OnDestroy {
 
   async presentPopoverInicio() {
     this.notificacionCareAppInicio = {  /*VALOR DE PRUEBA*/
-      data: 'cualquierData' //Indica si es noti de inicio o fin de carrera; 0=inicio 1=finCalificar
+      tipoNotificacion: '2' //Indica si es noti de inicio o fin de carrera; 0=inicio 1=finCalificar
     }
     this.enviarNotificacionInicio(this.notificacionCareAppInicio);
     const popover = await this.popoverController.create({
