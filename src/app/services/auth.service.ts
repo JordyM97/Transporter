@@ -60,6 +60,24 @@ export class AuthService {
       });  });
   }
 
+  sendNotificationStart(notificacion){ 
+    console.log(notificacion);
+    return new Promise((resolve, reject) => {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'token '+String(this.token));
+
+    this.http.post('https://axela.pythonanywhere.com/api/startService/', notificacion, {headers: headers}) //http://127.0.0.1:8000
+      .subscribe(res => {
+        let data = JSON.parse(JSON.stringify(res));
+        console.log(data);
+        resolve("ok");
+        }, (err) => {
+        console.log(err);
+        //resolve("ok");
+        resolve("bad");
+      });  });
+  }
+
   sendNotificationEnd(notificacion){ 
     console.log(notificacion);
     return new Promise((resolve, reject) => {

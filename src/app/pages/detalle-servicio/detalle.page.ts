@@ -55,7 +55,8 @@ export class DetallePage implements OnInit,OnDestroy {
 
   notificacionCalificar: FormGroup;
 
-  notificacionCareApp;
+  notificacionCareAppInicio;
+  notificacionCareAppFin;
   locationCollection: AngularFirestoreCollection<any>;
   location: Observable<any[]>
   Position: AngularFirestoreDocument<any>;
@@ -282,6 +283,10 @@ export class DetallePage implements OnInit,OnDestroy {
   }
 
   async presentPopoverInicio() {
+    this.notificacionCareAppInicio = {  /*VALOR DE PRUEBA*/
+      data: 'cualquierData' //Indica si es noti de inicio o fin de carrera; 0=inicio 1=finCalificar
+    }
+    this.enviarNotificacionInicio(this.notificacionCareAppInicio);
     const popover = await this.popoverController.create({
       component: PopoverInicioFinComponent,
       cssClass: 'notification-class',
@@ -298,10 +303,10 @@ export class DetallePage implements OnInit,OnDestroy {
   }
 
   async presentPopoverFin() {
-    this.notificacionCareApp = {  /*VALOR DE PRUEBA*/
+    this.notificacionCareAppFin = {  /*VALOR DE PRUEBA*/
       tipoNotificacion: '1' //Indica si es noti de inicio o fin de carrera; 0=inicio 1=finCalificar
     }
-    this.enviarNotificacion(this.notificacionCareApp);
+    this.enviarNotificacionFin(this.notificacionCareAppFin);
     const popover = await this.popoverController.create({
       component: PopoverFinComponent,
       cssClass: 'notification-class',
@@ -317,7 +322,23 @@ export class DetallePage implements OnInit,OnDestroy {
     return await popover.present();
   }
 
-  enviarNotificacion(data){
+  enviarNotificacionInicio(data){
+    console.log(data)
+
+    this.notificacionCalificar.get('service').setValue(localStorage.getItem("idServicio"));
+    this.notificacionCalificar.get('driver').setValue(localStorage.getItem("idConductor")); 
+    this.notificacionCalificar.get('client').setValue(localStorage.getItem("idCliente")); 
+    this.notificacionCalificar.get('data').setValue(JSON.stringify(data));
+
+    var formData: any = new FormData();
+    formData.append("service", this.notificacionCalificar.get('service').value);
+    formData.append("driver", this.notificacionCalificar.get('driver').value);
+    formData.append("client", this.notificacionCalificar.get('client').value);
+    formData.append("data", this.notificacionCalificar.get('data').value);
+    this.authService.sendNotificationStart(formData);
+  }
+
+  enviarNotificacionFin(data){
     console.log(data)
 
     this.notificacionCalificar.get('service').setValue(localStorage.getItem("idServicio"));
