@@ -16,7 +16,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
   providedIn: 'root'
 })
 export class AuthService {
-
+  public idCliente:any;
   public token: any;
   public id:any;
   public nombre: any;

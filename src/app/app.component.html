@@ -4,15 +4,17 @@
     <ion-content>
       <div class="menu-bg">
 
-        <div class="menu-header-content">
-          <ion-avatar>
-            <img src="assets/imgs/user.png">
-          </ion-avatar>
-          <label>
-            <h4>{{username}}</h4>
-            <p>Editar perfil</p>
-          </label>
-        </div>
+        <ion-menu-toggle routerLink="/perfil">
+          <div class="menu-header-content" >
+            <ion-avatar  >
+              <img src="assets/imgs/user.png">
+            </ion-avatar>
+            <label>
+              <h4>{{username}}</h4>
+            </label>
+          
+          </div>
+        </ion-menu-toggle>
 
         <ion-list lines="none" class="menu-items" color=“transparent”>
           <ion-menu-toggle>

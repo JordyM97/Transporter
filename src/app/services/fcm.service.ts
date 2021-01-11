@@ -148,7 +148,7 @@ export class FcmService {
               'idCliente':notification.notification.data.idCliente
             }
            
-  
+            console.log(notObjeto)
             this.shareData.nombreNot$.emit(JSON.stringify(notification.notification));
 
             this.shareData.notObj$.emit(notObjeto);
@@ -171,6 +171,7 @@ export class FcmService {
   }
 
   async presentPopoverDetalle(notification) {
+    console.log(notification.data.cliente)
     let title = notification.title;
     let strInicio = await this.detalle.geocodeLatLng(notification.data.inicio);
     let strFin = await this.detalle.geocodeLatLng(notification.data.fin);

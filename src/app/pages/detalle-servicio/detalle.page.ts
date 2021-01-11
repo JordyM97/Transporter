@@ -73,41 +73,17 @@ export class DetallePage implements OnInit,OnDestroy {
     private authService: AuthService,
     private firestore: AngularFirestore
     ) {
-    this.markerC=new google.maps.Marker({
-      map: this.mapa ,
-      icon: new google.maps.MarkerImage('https://www.google.com/url?sa=i&url=https%3A%2F%2Ficon-icons.com%2Fes%2Ficono%2FEl-usuario-cliente-personas%2F111213&psig=AOvVaw07q2gJNoivqOoT_aZ1xqs5&ust=1609945530883000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKjzjtGIhe4CFQAAAAAdAAAAABAE',
-       new google.maps.Size(22, 22),
-       new google.maps.Point(0, 18),
-       new google.maps.Point(11, 11))
-     });
-    this.locationCollection=firestore.collection(`/posicion`);//.collection('hist')doc('1')
-
-    this.location= this.locationCollection.valueChanges();
-    this.location.subscribe(value =>{
-      value.forEach(user=>{
-        if(user.id='24'){
-          const mark={
-            lat:user.location.lat,
-            lng: user.location.lng
-          }
-          this.markerC.setPosition(mark)
-          //console.log(user.location.lat)
-          //console.log(user.location.lng)
-        }
-      })
-    });
+    
   }
   ngOnDestroy(){
     console.log("*** DESTROY DETALLESS")
   }
-  /*ionViewWillLeave(){
-    this.watchPosition();
-  }*/
+  
 
   ionViewWillEnter(){
     this.loadMap();
     this.watchPosition();
-    this.watchDriverCli(24)
+    this.watchDriverCli(this.authService.idCliente)
   }
 
 
