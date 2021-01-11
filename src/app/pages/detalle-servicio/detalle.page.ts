@@ -291,7 +291,8 @@ export class DetallePage implements OnInit,OnDestroy {
          btn:" Iniciar Servicio" 
       },
       mode:"md",
-      translucent: true
+      translucent: true,
+      backdropDismiss: false
     });
     return await popover.present();
   }
@@ -310,7 +311,8 @@ export class DetallePage implements OnInit,OnDestroy {
          btn:" Finalizar Servicio" 
       },
       mode:"md",
-      translucent: true
+      translucent: true,
+      backdropDismiss: false
     });
     return await popover.present();
   }
@@ -332,7 +334,7 @@ export class DetallePage implements OnInit,OnDestroy {
     formData.append("driver", this.notificacionCalificar.get('driver').value);
     formData.append("client", this.notificacionCalificar.get('client').value);
     formData.append("data", this.notificacionCalificar.get('data').value);
-    this.authService.sendNotification(formData);
+    this.authService.sendNotificationEnd(formData);
   }
   
   

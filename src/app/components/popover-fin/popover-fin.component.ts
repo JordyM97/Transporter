@@ -37,7 +37,7 @@ export class PopoverFinComponent implements OnInit {
    }
 
   ngOnInit() {
-
+    
   }
 
   /*private bloquearInicio(){
@@ -66,8 +66,8 @@ export class PopoverFinComponent implements OnInit {
       this.stopWatch();
       //this.detalle.geocodeLatLng();          
       this.bloquearFin();
-      await this.popover.dismiss();
       if(this.rating!= null){
+        await this.popover.dismiss();
         this.router.navigate(['/tabs']); 
       }
       else{
