@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar-bg">
+    <div class="toolbar-content">
+      <ion-button fill="clear" slot="start">
+        <ion-menu-button color= "light" slot="start"></ion-menu-button>
+      </ion-button>
+
+
+        <img class="center-img" src="assets/imgs/logf.png">
+     
+
+      <ion-avatar>
+        <img src="assets/icon/avatar.png">
+      </ion-avatar>
+
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+    <ion-list id="historialResultados">
+      <ion-card *ngIf="historialViajes.length==0">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col></ion-col>
+              <ion-col>No hay viajes!</ion-col>            
+              <ion-col></ion-col>
+            </ion-row>
+          </ion-grid>
+        
+      </ion-card-content>
+      </ion-card>
+      
+    <ion-card>
+      <ion-item *ngFor="let viaje of historialFinal">
+        <ion-button fill="outline" slot="end" (click)="botonDetalles(viaje)">Detalles</ion-button>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row> <b>Inicio: </b>{{viaje.startAddress}} </ion-row>
+            <ion-row> <b>Fin: </b>{{viaje.endAddress}}  </ion-row>
+            <ion-row> <b>Estado: </b> <ion-label [ngStyle]="{'color':getColor(viaje.stateService)}"> {{viaje.stateService === 1 ? 'Finalizado' : 'En curso'}}</ion-label>  </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+</ion-content>

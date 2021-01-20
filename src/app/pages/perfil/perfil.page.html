@@ -1,0 +1,93 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar-bg">
+    <div class="toolbar-content">
+      <ion-button fill="clear" slot="start">
+        <ion-menu-button color= "light" slot="start"></ion-menu-button>
+      </ion-button>
+
+
+        <img class="center-img" src="assets/imgs/logf.png">
+    
+
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!--<div>
+    <ion-icon name="star" *ngFor="let num of [1,2,3,4,5]"
+    (click)="rate(num)" [ngStyle]="{'color':getColor(num)}">
+    </ion-icon>
+  </div>-->
+ 
+  <ion-grid>
+    <ion-col>
+    
+     <ion-row>
+      <img src='{{img}}'>
+     </ion-row>
+        
+      
+    
+
+    <ion-row class="estrellas">
+      <ion-label class="calificacion">{{calificacionStr}}</ion-label>
+      <img class="estrella" src="assets/imgs/estrella.png">
+    </ion-row>
+    <ion-row>
+      <ion-col>
+
+      </ion-col>   
+      <ion-col>
+        <ion-button (click)="uploadImg()">Subir una foto</ion-button> 
+      </ion-col>  
+      <ion-col>
+        
+      </ion-col> 
+    </ion-row>
+    
+    <ion-row>
+      <ion-row><ion-label class="titulo">Nombre:</ion-label></ion-row>
+    </ion-row>
+    <ion-row>
+      <ion-row><ion-label class="respuesta">{{nombre}}</ion-label></ion-row>
+    </ion-row>
+
+    <ion-row>
+      <ion-row><ion-label class="titulo">Apellido:</ion-label></ion-row>
+    </ion-row>
+    <ion-row>
+      <ion-row><ion-label class="respuesta">{{apellido}}</ion-label></ion-row>
+    </ion-row>
+
+    <ion-row>
+      <ion-row><ion-label class="titulo">Fecha de nacimiento:</ion-label></ion-row>
+    </ion-row>
+    <ion-row>
+      <ion-row><ion-label class="respuesta"></ion-label></ion-row>
+    </ion-row>
+
+    <ion-row>
+      <ion-row><ion-label class="titulo">Correo electrónico:</ion-label></ion-row>
+    </ion-row>
+    <ion-row>
+      <ion-row><ion-label class="respuesta">{{correo}}</ion-label></ion-row>
+    </ion-row>
+
+    <ion-row>
+      <ion-row><ion-label class="titulo">Número celular:</ion-label></ion-row>
+    </ion-row>
+    <ion-row>
+      <ion-row><ion-label class="respuesta"></ion-label></ion-row>
+    </ion-row>
+
+    <ion-row>
+      <ion-row><ion-label class="titulo">Fecha de registro:</ion-label></ion-row>
+    </ion-row>
+    <ion-row>
+      <ion-row><ion-label class="respuesta"></ion-label></ion-row>
+    </ion-row>
+  </ion-col>
+  </ion-grid>
+</ion-content>

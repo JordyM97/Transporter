@@ -60,7 +60,20 @@ const routes: Routes = [
   {
     path: 'pago',
     loadChildren: () => import('./pages/pago-servicio/pago-servicio.module').then( m => m.PagoServicioPageModule)
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
+  },
+  {
+    path: 'historial',
+    loadChildren: () => import('./pages/historial/historial.module').then( m => m.HistorialPageModule)
+  },
+  {
+    path: 'historial-detalle/:datos',
+    loadChildren: () => import('./pages/historial-detalle/historial-detalle.module').then( m => m.HistorialDetallePageModule)
   }
+
 
 
 ];

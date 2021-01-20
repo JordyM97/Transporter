@@ -43,6 +43,7 @@ export class MapPage implements OnInit,OnDestroy {
   ionViewWillEnter(){
    this.loadMap();
    this.driverService.getUserInfo(this.authService.getId(),this.authService.getToken());
+   this.driverService.getRecordDriver(this.authService.getId(),this.authService.getToken());
   }
   ngOnInit() {
     this.watchPosition();
