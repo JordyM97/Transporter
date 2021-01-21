@@ -21,6 +21,7 @@ import { DetalleServicioService } from './detalle-servicio.service';
 import { PopoverController } from '@ionic/angular';
 import { AuthService } from './auth.service';
 import { not } from '@angular/compiler/src/output/output_ast';
+import { ServicesDriverService } from './services-driver.service';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,8 @@ export class FcmService {
     private shareData: ShareDataService,
     private detalle:DetalleServicioService,
     private popoverController: PopoverController,
-    private authService:AuthService
+    private authService:AuthService,
+    private DriverService: ServicesDriverService
   ) {
 
   }
@@ -87,23 +89,25 @@ export class FcmService {
 
     PushNotifications.addListener('pushNotificationReceived',
     async (notification:  PushNotification) => {
-        let origin=JSON.parse(notification.data.inicio);
+        let origin=JSON.parse(notification.data.startidLocation);
         console.log(notification.data.pk);
         console.log('Inicio> ',typeof(origin))//object
         console.log('Inicio> ',typeof(origin.lat))
-        let destiny=JSON.parse(notification.data.fin);
+        let destiny=JSON.parse(notification.data.endidLocation);
         console.log('Fin> ',typeof(destiny.lng))
+        this.DriverService.getClientInfo(notification.data.ClientService,localStorage.getItem("token"));
 
         let notObjeto = {
           'title':notification.title,
           'inicio':origin,
           'fin':destiny,
-          'hora':notification.data.hora,
-          'fecha':notification.data.fecha,
+          'hora':notification.data.hora+":"+notification.data.minuto,
+          'fecha':notification.data.anio+"/"+notification.data.mes+"/"+notification.data.dia,
           'metodoPago':notification.data.metodoPago,
           'valor':notification.data.valor,
-          'cliente':notification.data.cliente,
-          'idCliente':notification.data.idCliente
+          'cliente':this.DriverService.getNameClient()+" "+this.DriverService.getLastNameClient(),
+          'idCliente':notification.data.ClientService,
+          'pkServicio':notification.data.pk
         }
 
         this.shareData.nombreNot$.emit(JSON.stringify(notification));
@@ -117,7 +121,7 @@ export class FcmService {
         this.shareData.fin=await this.detalle.geocodeLatLng(notification.data.fin);
 
 
-        this.presentPopoverDetalle(notification);
+        this.presentPopoverDetalle(notObjeto);
       }
     );
 
@@ -129,6 +133,7 @@ export class FcmService {
           console.log('ActionPerformed, notification: '+ JSON.stringify(notification.notification))
           console.log('ActionPerformed, data: '+ JSON.stringify(notification.notification.data))
           let isCompleteRouter = await this.router.navigateByUrl(`/tabs/${notification.notification.data}`)
+          this.DriverService.getClientInfo(notification.notification.data.ClientService,localStorage.getItem("token"));
           if(isCompleteRouter){
             console.log('LLEGO A LA TABS')
              let origin=JSON.parse(notification.notification.data.inicio);
@@ -140,12 +145,13 @@ export class FcmService {
               'title':notification.notification.title,
               'inicio':origin,
               'fin':destiny,
-              'hora':notification.notification.data.hora,
-              'fecha':notification.notification.data.fecha,
+              'hora':notification.notification.data.hora+":"+notification.notification.data.minuto,
+              'fecha':notification.notification.data.anio+"/"+notification.notification.data.mes+"/"+notification.notification.data.dia,
               'metodoPago':notification.notification.data.metodoPago,
               'valor':notification.notification.data.valor,
-              'cliente':notification.notification.data.cliente,
-              'idCliente':notification.notification.data.idCliente
+              'cliente':this.DriverService.getNameClient()+" "+this.DriverService.getLastNameClient(),
+              'idCliente':notification.notification.data.ClientService,
+              'pkServicio':notification.notification.data.pk
             }
            
             console.log(notObjeto)
@@ -158,7 +164,7 @@ export class FcmService {
             //this.presentAlertConfirm(notification);
             this.shareData.inicio=await this.detalle.geocodeLatLng(notification.notification.data.inicio);
             this.shareData.fin=await this.detalle.geocodeLatLng(notification.notification.data.fin);
-          this.presentPopoverDetalle(notification.notification);
+          this.presentPopoverDetalle(notObjeto);
           }
           
         }
@@ -171,18 +177,19 @@ export class FcmService {
   }
 
   async presentPopoverDetalle(notification) {
-    console.log(notification.data.cliente)
+    console.log(notification.cliente)
     let title = notification.title;
-    let strInicio = await this.detalle.geocodeLatLng(notification.data.inicio);
-    let strFin = await this.detalle.geocodeLatLng(notification.data.fin);
-    let hora = notification.data.hora;
-    let fecha = notification.data.fecha;
-    let metodoPago = notification.data.metodoPago;
-    let valor = notification.data.valor;
-    let cliente = notification.data.cliente;
-    let inicioCoords = notification.data.inicio;
-    let finCoords = notification.data.fin;
-    let idCliente = notification.data.idCliente;
+    let strInicio = await this.detalle.geocodeLatLng(notification.inicio);
+    let strFin = await this.detalle.geocodeLatLng(notification.fin);
+    let hora = notification.hora;
+    let fecha = notification.fecha;
+    let metodoPago = notification.metodoPago;
+    let valor = notification.valor;
+    let cliente = notification.cliente;
+    let inicioCoords = notification.inicio;
+    let finCoords = notification.fin;
+    let idCliente = notification.idCliente;
+    let pkServicio = notification.pkServicio;
     //let idCliente = notification.data.idCliente;
 
     const popover = await this.popoverController.create({
@@ -199,7 +206,8 @@ export class FcmService {
          cliente: cliente,
          inicioCoords: inicioCoords,
          finCoords: finCoords,
-         idCliente: idCliente
+         idCliente: idCliente,
+         pkServicio: pkServicio
       },
       mode:"md",
       translucent: true

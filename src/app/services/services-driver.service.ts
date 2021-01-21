@@ -11,6 +11,9 @@ export class ServicesDriverService {
   idDriver: any;
   idVehicle: any;
 
+  nameClient: any;
+  lastNameClient: any;
+
   nameDriver: any;
   lastNameDriver: any;
   emailDriver: any;
@@ -45,6 +48,26 @@ export class ServicesDriverService {
           this.lastNameDriver = data.last_name;
           this.emailDriver = data.email;
           this.getDriverPk(this.idUser,token);
+          console.log(data);
+          resolve("ok");
+          }, (err) => {
+          console.log(err);
+          resolve("bad");
+        });  });
+  }
+
+  getClientInfo(id: any, token: any){
+    return new Promise((resolve, reject) => {
+      let headers = new HttpHeaders();
+      headers = headers.set('Authorization', 'token '+String(token));
+      console.log(token);
+      console.log(headers);
+  
+      this.http.get('https://axela.pythonanywhere.com/api/user/'+String(id)+'/', {headers: headers}) //http://127.0.0.1:8000
+        .subscribe(res => {
+          let data = JSON.parse(JSON.stringify(res));
+          this.nameClient = data.first_name;
+          this.lastNameClient = data.last_name;
           console.log(data);
           resolve("ok");
           }, (err) => {
@@ -193,6 +216,12 @@ export class ServicesDriverService {
   }
   getType(){
     return this.typeVehicle;
+  }
+  getNameClient(){
+    return this.nameClient;
+  }
+  getLastNameClient(){
+    return this.lastNameClient;
   }
 
 }

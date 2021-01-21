@@ -25,6 +25,7 @@ export class PopoverDetalleComponent implements OnInit {
   notificacionCareApp;
   viajesCliente;
   idServicio;
+  pkServicio;
   uploadForm: FormGroup;
 
   constructor(
@@ -48,6 +49,7 @@ export class PopoverDetalleComponent implements OnInit {
     this.idCliente = this.navParams.get("idCliente")
     this.inicioCoords = this.navParams.get("inicioCoords")
     this.finCoords = this.navParams.get("finCoords")
+    this.pkServicio = this.navParams.get("pkServicio")
    }
 
   ngOnInit() {
@@ -94,7 +96,7 @@ export class PopoverDetalleComponent implements OnInit {
     //Almacenamiento local de variables para notificaciones
     localStorage.setItem("idCliente",this.idCliente);
     localStorage.setItem("idConductor",this.servicesDriver.getId());
-    localStorage.setItem("idServicio",this.idServicio);
+    localStorage.setItem("idServicio",this.pkServicio);
 
     this.notificacionCareApp = {  /*VALOR DE PRUEBA*/
       nombreConductor: this.servicesDriver.getName(),
