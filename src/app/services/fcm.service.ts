@@ -88,7 +88,9 @@ export class FcmService {
     PushNotifications.addListener('pushNotificationReceived',
     async (notification:  PushNotification) => {
         let origin=JSON.parse(notification.data.inicio);
-        console.log(notification.data.pk);
+        console.log(notification.data);
+        console.log(JSON.parse(notification.data));
+        
         console.log('Inicio> ',typeof(origin))//object
         console.log('Inicio> ',typeof(origin.lat))
         let destiny=JSON.parse(notification.data.fin);

@@ -88,9 +88,10 @@ export class PopoverDetalleComponent implements OnInit {
     });*/
     console.log('Confirm Okay');
     this.viajesCliente = this.servicesDriver.getRecordC();
+   
     console.log(this.viajesCliente)
     this.idServicio = this.viajesCliente.pop().idService /*Conseguimos el ultimo id del servicio*/
-
+    console.log(this.idServicio);
     //Almacenamiento local de variables para notificaciones
     localStorage.setItem("idCliente",this.idCliente);
     localStorage.setItem("idConductor",this.servicesDriver.getId());
