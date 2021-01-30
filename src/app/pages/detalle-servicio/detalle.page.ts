@@ -130,8 +130,10 @@ export class DetallePage implements OnInit,OnDestroy {
     });
     await this.directionsDisplay.setMap(this.mapa);
     await google.maps.event.addListenerOnce(this.mapa, 'idle', () => {
-      this.origin=this.shareData.notificacion.data.inicio;
-      this.destination=this.shareData.notificacion.data.fin;
+      console.log(this.shareData.notificacion);
+      
+      this.origin=this.shareData.notificacion.data.startidLocation;
+      this.destination=this.shareData.notificacion.data.endidLocation;
       mapEle.classList.add('show-map');
       this.calculateRoute(this.origin,this.destination);
     });    
@@ -139,7 +141,9 @@ export class DetallePage implements OnInit,OnDestroy {
 
     //Realiza el calculo de la mejor ruta, utiliza los valores de origen y destino| se le debe pasar el modo
     //de viaje que se realiza en este caso DRIVING
-  private calculateRoute(ini:any,fin:any){  
+  private calculateRoute(ini:any,fin:any){
+    console.log(ini)
+      
     this.directionsService.route({
       origin: JSON.parse(ini) ,
       destination: JSON.parse(fin),
