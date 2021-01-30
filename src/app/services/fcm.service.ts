@@ -89,11 +89,11 @@ export class FcmService {
 
     PushNotifications.addListener('pushNotificationReceived',
     async (notification:  PushNotification) => {
-        let origin=JSON.parse(notification.data.startidLocation);
+        let origin=JSON.parse(notification.data.coordStart);
         console.log(notification.data.pk);
         console.log('Inicio> ',typeof(origin))//object
         console.log('Inicio> ',typeof(origin.lat))
-        let destiny=JSON.parse(notification.data.endidLocation);
+        let destiny=JSON.parse(notification.data.coordEnd);
         console.log('Fin> ',typeof(destiny.lng))
         await this.DriverService.getClientInfo(notification.data.ClientService,this.authService.getToken());
         console.log(this.DriverService.getNameClient()+" "+this.DriverService.getLastNameClient());
@@ -106,14 +106,14 @@ export class FcmService {
 
         let notObjeto = {
           'title':notification.title,
-          'inicio':notification.data.startidLocation,
-          'fin':notification.data.endidLocation,
+          'inicio':notification.data.coordStart,
+          'fin':notification.data.coordEnd,
           'hora': hora+':'+minuto,
           'fecha': dia+'/'+mes+'/'+anio,
-          'metodoPago':notification.data.idPaymentService,
-          'valor':'7',
+          'metodoPago':notification.data.idTypePayment,
+          'valor':notification.data.amountPayment,
           'cliente':this.DriverService.getNameClient()+" "+this.DriverService.getLastNameClient(),
-          'idCliente':notification.data.ClientService,
+          'idCliente':notification.data.idClientService,
           'pkServicio':notification.data.pk
         }
 
@@ -143,10 +143,10 @@ export class FcmService {
           this.DriverService.getClientInfo(notification.notification.data.ClientService,localStorage.getItem("token"));
           if(isCompleteRouter){
             console.log('LLEGO A LA TABS')
-             let origin=JSON.parse(notification.notification.data.inicio);
+             let origin=JSON.parse(notification.notification.data.coordStart);
              console.log('Inicio> ',typeof(origin))//object
              console.log('Inicio> ',typeof(origin.lat))
-             let destiny=JSON.parse(notification.notification.data.fin);
+             let destiny=JSON.parse(notification.notification.data.coordEnd);
              console.log('Fin> ',typeof(destiny.lng))
              let date = new Date(notification.notification.data.startDate);
             let anio = date.getFullYear(); 
@@ -156,14 +156,14 @@ export class FcmService {
             let minuto =String(date.getMinutes());
              let notObjeto = {
               'title':notification.notification.title,
-              'inicio':notification.notification.data.startidLocation,
-              'fin':notification.notification.data.endidLocation,
+              'inicio':notification.notification.data.coordStart,
+              'fin':notification.notification.data.coordEnd,
               'hora': hora+':'+minuto,
               'fecha': dia+'/'+mes+'/'+anio,
-              'metodoPago':notification.notification.data.idPaymentService,
-              'valor':'7',
+              'metodoPago':notification.notification.data.idTypePayment,
+              'valor':notification.notification.data.amountPayment,
               'cliente':this.DriverService.getNameClient()+" "+this.DriverService.getLastNameClient(),
-              'idCliente':notification.notification.data.ClientService,
+              'idCliente':notification.notification.data.idClientService,
               'pkServicio':notification.notification.data.pk
             }
            
