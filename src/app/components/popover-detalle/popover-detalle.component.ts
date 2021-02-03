@@ -80,20 +80,7 @@ export class PopoverDetalleComponent implements OnInit {
   async btnSi(){
     console.log(this.idCliente);
     this.authService.idCliente=this.idCliente;
-    console.log(this.authService.getToken());
-    /*this.servicesDriver.getRecordClient(this.idCliente,this.authService.getToken());
-    this.uploadForm = this.formBuilder.group({
-      service: [''],
-      driver: [''],
-      client: [''],
-      data: ['']
-    });*/
-    console.log('Confirm Okay');
-    this.viajesCliente = this.servicesDriver.getRecordC();
    
-    console.log(this.viajesCliente)
-    this.idServicio = this.viajesCliente.pop().idService /*Conseguimos el ultimo id del servicio*/
-    console.log(this.idServicio);
     //Almacenamiento local de variables para notificaciones
     localStorage.setItem("idCliente",this.idCliente);
     localStorage.setItem("idConductor",this.servicesDriver.getId());
@@ -109,7 +96,7 @@ export class PopoverDetalleComponent implements OnInit {
       colorVehiculo: this.servicesDriver.getColor(),
       inicioCoords: this.inicioCoords,
       finCoords: this.finCoords,
-      idConductor: this.servicesDriver.getId(),
+      idConductor: this.servicesDriver.idDriver,
       tipoNotificacion: '0' //Indica si es noti de inicio o fin de carrera; 0=inicio 1=finCalificar
     }
     this.enviarNotificacion(this.notificacionCareApp);

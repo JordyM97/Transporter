@@ -61,7 +61,7 @@ export class ServicesDriverService {
       let headers = new HttpHeaders();
       headers = headers.set('Authorization', 'token '+String(token));
       console.log(token);
-      console.log(headers);
+      console.log(id);
   
       this.http.get('https://axela.pythonanywhere.com/api/user/'+String(id)+'/', {headers: headers}) //http://127.0.0.1:8000
         .subscribe(res => {

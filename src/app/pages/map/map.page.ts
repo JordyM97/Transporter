@@ -87,7 +87,7 @@ export class MapPage implements OnInit,OnDestroy {
   //Funcion para obtener la localizacion, devuelve dos valores (latitud y longitud)
   private async getLocation() {
     const myPosition = await this.geolocation.getCurrentPosition();
-    console.log("Latitud :"+myPosition.coords.latitude+"Longitud :"+myPosition.coords.longitude);
+    //console.log("Latitud :"+myPosition.coords.latitude+"Longitud :"+myPosition.coords.longitude);
 
     return {
       lat: myPosition.coords.latitude,
@@ -99,13 +99,13 @@ export class MapPage implements OnInit,OnDestroy {
     this.watch.subscribe((data)=>{
       if(this.marker!=null){
         this.marker.setMap(null);
-        console.log("entro");
+        //console.log("entro");
       }
       if ("coords" in data){
         let lat=data.coords.latitude;
         let lng=data.coords.longitude;
-        console.log("latitud "+ lat);
-        console.log("longitud "+ lng);
+        //console.log("latitud "+ lat);
+        //console.log("longitud "+ lng);
         let latLng=new google.maps.LatLng(lat,lng);
         this.addPosition(this.authService.id,JSON.stringify(latLng))
         this.marker = new google.maps.Marker({

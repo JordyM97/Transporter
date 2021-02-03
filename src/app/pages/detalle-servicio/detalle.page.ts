@@ -132,8 +132,8 @@ export class DetallePage implements OnInit,OnDestroy {
     await google.maps.event.addListenerOnce(this.mapa, 'idle', () => {
       console.log(this.shareData.notificacion);
       
-      this.origin=this.shareData.notificacion.data.startidLocation;
-      this.destination=this.shareData.notificacion.data.endidLocation;
+      this.origin=this.shareData.notificacion.data.inicioCoords;
+      this.destination=this.shareData.notificacion.data.finCoords;
       mapEle.classList.add('show-map');
       this.calculateRoute(this.origin,this.destination);
     });    
@@ -162,13 +162,13 @@ export class DetallePage implements OnInit,OnDestroy {
     this.watch.subscribe((data)=>{
       if(this.marker!=null){
         this.marker.setMap(null);
-        console.log("entro");
+        //console.log("entro");
       }
       if ("coords" in data){
         let lat=data.coords.latitude;
         let lng=data.coords.longitude;
-        console.log("latitud "+ lat);
-        console.log("longitud "+ lng);
+       // console.log("latitud "+ lat);
+        //console.log("longitud "+ lng);
         let latLng=new google.maps.LatLng(lat,lng);
         this.addPosition(this.authService.id,JSON.stringify(latLng))
         this.marker = new google.maps.Marker({
@@ -205,7 +205,7 @@ export class DetallePage implements OnInit,OnDestroy {
     this.PositionD= this.firestore.doc(`/posicion/${id}`).valueChanges()
     
     this.PositionD.subscribe(val=>{ 
-      console.log(val.location)
+      //console.log(val.location)
       const myLatLng = {
         lat: JSON.parse(val.location).lat,
         lng: JSON.parse(val.location).lng
@@ -220,57 +220,7 @@ export class DetallePage implements OnInit,OnDestroy {
        });
       })
   }
-  /*
-  async confirmarServicio() {
-    const alert = await this.alertController.create({
-      cssClass: 'notification-class',
-      header: `Inicio del servicio`,
-      message: `<div>
-     <img class="center" src="assets/icon/proceso_exitoso.png">
-     <p>¿Desea iniciar el servicio?</p>
-    </div>`,
-      buttons: [{
-        text: 'Aceptar',
-        handler: () => {
-          console.log('CONFIRM ACEPTAR');
-          this.bloquearInicio();
-        }
-      }, {
-        text: 'Cancelar',
-        role:'cancel'
-      }]
-    });
-
-    await alert.present();
-  }
-
-  async finalizarServicio() {
-    const alert = await this.alertController.create({
-
-      cssClass: 'notification-class',
-      header: `Fin del servicio`,
-      message: `<div>
-     <img class="center" src="assets/icon/proceso_exitoso.png">
-
-     <p>¿Desea finalizar el servicio?</p>
-    </div>`,
-      buttons: [{
-        text: 'Aceptar',
-        handler: () => {
-          console.log('CARRERA FINALIZADA');
-          this.stopWatch();
-          //this.detalle.geocodeLatLng();
-          this.bloquearFin();
-          this.router.navigateByUrl('/pago');
-        }
-      }, {
-        text: 'Cancelar',
-        role:'cancel'
-      }]
-    });
-
-    await alert.present();
-  }*/
+ 
 
   private bloquearInicio(){
     (<HTMLInputElement> document.getElementById("confirmar")).disabled = true;
