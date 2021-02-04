@@ -158,6 +158,11 @@ export class AuthService {
             this.nombre = data.first_name;
             this.apellido = data.last_name;
             this.correo = data.email;
+            this.userApp = {
+              uid: "fZJOTHCVcqccdHjx6NDzkozpBdF3",
+              email: data.email,
+              phoneNumber: data.celular,
+            };
             console.log(data);
             resolve("ok");
             }, (err) => {
