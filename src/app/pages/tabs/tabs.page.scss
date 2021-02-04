@@ -5,4 +5,10 @@ ion-tab-button[aria-selected=true] {
 ion-tab-button{
   --color-focused: #e6242f;
   --color-selected:white;
+  ion-icon{
+    color: black;
+  }
+}
+ion-tabs{
+  background-color: white;
 }

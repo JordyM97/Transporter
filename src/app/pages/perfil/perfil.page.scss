@@ -2,7 +2,9 @@ ion-fab-button {
     --background: red;
     color: black;
 }
-
+ion-content{
+    --ion-background-color: #282F69;
+}
 .estrella {
     height: 35px;
     width: 35px;
@@ -15,6 +17,10 @@ ion-grid {
     flex-direction: column;
     //color: white;
     margin-top: 10%;
+    ion-button{
+        --background-color: red;
+        --background: red;
+    }
 }
 
 .estrellas {

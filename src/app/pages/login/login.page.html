@@ -1,29 +1,34 @@
 <ion-content>
-
-  <ion-img class="icon" src="assets/imgs/logf.png">
-  </ion-img>
+  <div class="top">
+    <p>BIENVENIDOS</p>
+    <ion-img class="icon" src="assets/imgs/logf.png">  </ion-img>
+  </div>
 
   <div class="content-items">
-  <ion-item >
-    <ion-label position="floating"> Correo electrónico</ion-label>
-    <ion-input type="text" [(ngModel)]="correo_electronico" name="correo_electronico"></ion-input>
-  </ion-item>
+    <ion-item >
+      <ion-label position="floating"> Correo electrónico</ion-label>
+      <ion-input type="text" [(ngModel)]="correo_electronico" name="correo_electronico"></ion-input>
+    </ion-item>
   
-  <ion-item >
-    <ion-label position="floating">Contraseña</ion-label>
-    <ion-input [type]="showPassword ? 'text':'password'" [(ngModel)]="contrasenia" name="contrasenia"></ion-input>
-    <ion-icon slot="end" [name]="passwordIcon" (click)="iconPassword()"></ion-icon>
-  </ion-item>
+    <ion-item >
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input [type]="showPassword ? 'text':'password'" [(ngModel)]="contrasenia" name="contrasenia"></ion-input>
+      <ion-icon slot="end" [name]="passwordIcon" (click)="iconPassword()"></ion-icon>
+    </ion-item>
 
   
 
-  <div class="ion-text-center ion-margin-top">
+    <div class="ion-text-center ion-margin-top">
       
-    <a class="content-link" routerLink="/reset-password">
-      <small >¿Olvidó su contraseña? Recuperar Contraseña</small>
-    </a>
+      <a class="content-link" routerLink="/reset-password">
+        <small >¿Olvidó su contraseña?</small>
+      </a>
+      <a class="content-link" routerLink="/reset-password">
+        <small >Registrate</small>
+      </a>
+    </div>
+
   </div>
-</div>
 
   
   <ion-button expand="full" (click)="on_submit_login()" class="boton">
