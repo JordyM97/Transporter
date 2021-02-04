@@ -95,6 +95,23 @@ export class AuthService {
         resolve("bad");
       });  });
   }
+  getUserId(id:any){ 
+    return new Promise((resolve, reject) => {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'token '+String(this.token));
+
+    this.http.get('https://axela.pythonanywhere.com/api/client/'+id+'/', {headers: headers}) //http://127.0.0.1:8000
+      .subscribe(res => {
+        let data = JSON.parse(JSON.stringify(res));
+        console.log(data);
+        this.idCliente=data.userClient;
+        resolve("ok");
+        }, (err) => {
+        console.log(err);
+        //resolve("ok");
+        resolve("bad");
+      });  });
+  }
 
    sendDeviceToken(){
     console.log(this.token);

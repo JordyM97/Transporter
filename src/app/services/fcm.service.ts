@@ -95,7 +95,8 @@ export class FcmService {
         console.log('Inicio> ',typeof(origin.lat))
         let destiny=JSON.parse(notification.data.coordEnd);
         console.log('Fin> ',typeof(destiny.lng))
-        await this.DriverService.getClientInfo(notification.data.ClientService,this.authService.getToken());
+        await this.authService.getUserId(notification.data.idClientService);
+        await this.DriverService.getClientInfo(this.authService.idCliente,this.authService.getToken());
         console.log(this.DriverService.getNameClient()+" "+this.DriverService.getLastNameClient());
         let date = new Date(notification.data.startDate);
         let anio = date.getFullYear(); 
@@ -124,8 +125,8 @@ export class FcmService {
         this.shareData.notificacion = notification;
         this.shareData.detalleServicio=notObjeto;
         //this.presentAlertConfirm(notification);
-        this.shareData.inicio=await this.detalle.geocodeLatLng(notification.data.startidLocation);
-        this.shareData.fin=await this.detalle.geocodeLatLng(notification.data.endidLocation);
+        this.shareData.inicio=await this.detalle.geocodeLatLng(notification.data.coordStart);
+        this.shareData.fin=await this.detalle.geocodeLatLng(notification.data.coordEnd);
 
 
         this.presentPopoverDetalle(notObjeto);
@@ -140,7 +141,7 @@ export class FcmService {
           console.log('ActionPerformed, notification: '+ JSON.stringify(notification.notification))
           console.log('ActionPerformed, data: '+ JSON.stringify(notification.notification.data))
           let isCompleteRouter = await this.router.navigateByUrl(`/tabs/${notification.notification.data}`)
-          this.DriverService.getClientInfo(notification.notification.data.ClientService,localStorage.getItem("token"));
+          this.DriverService.getClientInfo(notification.notification.data.idClientService,localStorage.getItem("token"));
           if(isCompleteRouter){
             console.log('LLEGO A LA TABS')
              let origin=JSON.parse(notification.notification.data.coordStart);
@@ -175,8 +176,8 @@ export class FcmService {
             this.shareData.notificacion = notification.notification;
             this.shareData.detalleServicio=notObjeto;
             //this.presentAlertConfirm(notification);
-            this.shareData.inicio=await this.detalle.geocodeLatLng(notification.notification.data.inicio);
-            this.shareData.fin=await this.detalle.geocodeLatLng(notification.notification.data.fin);
+            this.shareData.inicio=await this.detalle.geocodeLatLng(notification.notification.data.coordStart);
+            this.shareData.fin=await this.detalle.geocodeLatLng(notification.notification.data.coordEnd);
           this.presentPopoverDetalle(notObjeto);
           }
           
