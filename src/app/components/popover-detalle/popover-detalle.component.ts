@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup  } from '@angular/forms';
 import { ServicesDriverService } from 'src/app/services/services-driver.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { PopoverMapaComponent } from '../popover-mapa/popover-mapa.component';
+import { ChatService } from '../../services/chat.service';
 @Component({
   selector: 'app-popover-detalle',
   templateUrl: './popover-detalle.component.html',
@@ -35,6 +36,7 @@ export class PopoverDetalleComponent implements OnInit {
     private formBuilder: FormBuilder,
     private servicesDriver: ServicesDriverService,
     private authService: AuthService,
+    private chatService: ChatService,
     public modalController: ModalController
   ){
     this.viajesCliente = [];
@@ -100,6 +102,8 @@ export class PopoverDetalleComponent implements OnInit {
       tipoNotificacion: '0' //Indica si es noti de inicio o fin de carrera; 0=inicio 1=finCalificar
     }
     this.enviarNotificacion(this.notificacionCareApp);
+    
+    this.chatService.addChatRoom(this.authService.userApp.uid+'-'+localStorage.getItem("uidCliente"));
     this.router.navigate(['/detalle']);
     await this.popovercontroller.dismiss();
   }

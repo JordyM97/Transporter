@@ -105,6 +105,7 @@ export class AuthService {
         let data = JSON.parse(JSON.stringify(res));
         console.log(data);
         this.idCliente=data.userClient;
+        localStorage.setItem("uidClient",data.uid);
         resolve("ok");
         }, (err) => {
         console.log(err);
@@ -176,7 +177,8 @@ export class AuthService {
             this.apellido = data.last_name;
             this.correo = data.email;
             this.userApp = {
-              uid: "fZJOTHCVcqccdHjx6NDzkozpBdF3",
+              //uid: "YrFq70MGNXRxQfFGmp4DilQyMS13",
+              uid: data.uid,
               email: data.email,
               phoneNumber: data.celular,
             };

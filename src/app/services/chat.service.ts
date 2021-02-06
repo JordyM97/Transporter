@@ -59,6 +59,15 @@ export class ChatService {
       )
     )
   }
+  addChatRoom(chatRoom:string){
+    return this.afs.collection(`/chatRoomsTest/`).doc(chatRoom).set(
+      {
+        id : chatRoom,
+        dateStart: firebase.firestore.FieldValue.serverTimestamp(),
+        descripcion: "servicio"
+      }
+    );
+  }
 
   getMessages(chatRoom:string){
     console.log('cg> ',chatRoom)

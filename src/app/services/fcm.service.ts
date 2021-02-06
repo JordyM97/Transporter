@@ -167,7 +167,7 @@ export class FcmService {
               'idCliente':notification.notification.data.idClientService,
               'pkServicio':notification.notification.data.pk
             }
-           
+            localStorage.setItem('idCliente',notification.notification.data.idClientService);           
             console.log(notObjeto)
             this.shareData.nombreNot$.emit(JSON.stringify(notification.notification));
 
