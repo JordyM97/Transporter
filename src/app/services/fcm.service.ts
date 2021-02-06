@@ -91,10 +91,11 @@ export class FcmService {
     async (notification:  PushNotification) => {
         let origin=JSON.parse(notification.data.coordStart);
         console.log(notification.data.pk);
+        localStorage.setItem("uidClient", notification.data.uidClient);
         console.log('Inicio> ',typeof(origin))//object
         console.log('Inicio> ',typeof(origin.lat))
         let destiny=JSON.parse(notification.data.coordEnd);
-        console.log('Fin> ',typeof(destiny.lng))
+        console.log('Fin> ',typeof(destiny.lng));
         await this.authService.getUserId(notification.data.idClientService);
         await this.DriverService.getClientInfo(this.authService.idCliente,this.authService.getToken());
         console.log(this.DriverService.getNameClient()+" "+this.DriverService.getLastNameClient());

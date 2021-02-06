@@ -56,6 +56,9 @@ export class MapPage implements OnInit,OnDestroy {
   async loadMap() {
     const loading = await this.loadingCtrl.create();
     loading.present();
+    setTimeout(() => {
+      loading.dismiss();
+    }, 3000);
     const myLatLng = await this.getLocation();
     const mapEle: HTMLElement = document.getElementById('map');
     this.map = new google.maps.Map(mapEle, {

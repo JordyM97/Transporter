@@ -103,7 +103,8 @@ export class PopoverDetalleComponent implements OnInit {
     }
     this.enviarNotificacion(this.notificacionCareApp);
     
-    this.chatService.addChatRoom(this.authService.userApp.uid+'-'+localStorage.getItem("uidCliente"));
+    this.chatService.addChatRoom(this.authService.userApp.uid+'-'
+    +localStorage.getItem("uidClient")+'-'+this.pkServicio);
     this.router.navigate(['/detalle']);
     await this.popovercontroller.dismiss();
   }
