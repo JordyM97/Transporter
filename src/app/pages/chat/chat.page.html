@@ -1,6 +1,15 @@
-<app-header-back title="Chat">
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar-bg">
+    <div class="toolbar-content">
+      <ion-button fill="clear" slot="start">
+        <ion-menu-button color= "light" slot="start"></ion-menu-button>
+      </ion-button>
 
-</app-header-back>
+
+      <img class="center-img" src="assets/imgs/logf.png"> <!--"assets/imgs/LOGO1.png-->
+    </div>
+  </ion-toolbar>
+</ion-header>
 
 
 <ion-content padding>
@@ -12,9 +21,10 @@
         <!-- <ion-img [src]="chat.img"></ion-img> -->
       </ion-avatar>
       <ion-label>
-        <h2>{{chat.id}}</h2>
+        <h2>{{chat.client}}</h2>
         <h3></h3>
         <p>{{chat.descripcion}}</p>
+        <p>{{chat.dateStart?.toMillis() | date:'short'}}</p>
       </ion-label>
     </ion-item>
   </ion-list>

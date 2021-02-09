@@ -59,12 +59,13 @@ export class ChatService {
       )
     )
   }
-  addChatRoom(chatRoom:string){
+  addChatRoom(chatRoom:string,driver:string,client:string){
     return this.afs.collection(`/chatRoomsTest/`).doc(chatRoom).set(
       {
-        id : chatRoom,
         dateStart: firebase.firestore.FieldValue.serverTimestamp(),
-        descripcion: "servicio"
+        descripcion: "Servicio",
+        driver: driver,
+        client:client
       }
     );
   }

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color='primary'>
-    <ion-title>{{newMsg}}</ion-title>
+    <ion-title>{{chat.client}}</ion-title>
     <ion-buttons slot='end'>
       <ion-button fill='clear' (click)="closeChat()">
         <ion-icon name='close' slot='icon-only'></ion-icon>
@@ -13,15 +13,10 @@
 <ion-grid>
   <ion-row *ngFor='let message of messages'>
     <ion-col size='9' class='message' [offset]='message.myMsg ? 3 : 0' [ngClass]='{ "my-message": message.myMsg, "other-message": !message.myMsg}'>
-      <b>
-       myMsg: {{message.myMsg}}
-      </b>
-      <br>
       <span>
         {{message.msg}}
       </span>
       <div class='time ion-text-right'>
-        <br>
         {{message.createdAt?.toMillis() | date:'short'}}
       </div>
     </ion-col>
