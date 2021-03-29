@@ -30,3 +30,4 @@ Se ubica dentro de la carpeta donde se quiere el nuevo componente y se escribe
 > `[#id de la HU] Comentario`
 
 
+Axel Auza A
