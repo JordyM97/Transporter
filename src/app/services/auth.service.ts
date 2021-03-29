@@ -46,7 +46,7 @@ export class AuthService {
     console.log(notificacion);
     return new Promise((resolve, reject) => {
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', 'token '+String(this.token));
+    headers = headers.set('Authorization', String(this.token));
 
     this.http.post('https://axela.pythonanywhere.com/api/acceptService/', notificacion, {headers: headers}) //http://127.0.0.1:8000
       .subscribe(res => {

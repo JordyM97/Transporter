@@ -1,38 +1,55 @@
 <ion-content>
   <div class="top">
-    <p>BIENVENIDOS</p>
-    <ion-img class="icon" src="assets/imgs/logf.png">  </ion-img>
+    <p>BIENVENIDOS!</p>
+    <ion-img class="icon" src="assets/imgs/logi.png">  </ion-img>
   </div>
 
   <div class="content-items">
-    <ion-item >
-      <ion-label position="floating"> Correo electrónico</ion-label>
-      <ion-input type="text" [(ngModel)]="correo_electronico" name="correo_electronico"></ion-input>
-    </ion-item>
-  
-    <ion-item >
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input [type]="showPassword ? 'text':'password'" [(ngModel)]="contrasenia" name="contrasenia"></ion-input>
-      <ion-icon slot="end" [name]="passwordIcon" (click)="iconPassword()"></ion-icon>
+    <ion-item>
+      
+      <ion-input
+        type="text"
+        [(ngModel)]="correo_electronico"
+        name="correo_electronico"
+      ></ion-input>
     </ion-item>
 
-  
+    <ion-item>
+      <!--<ion-label position="floating"> Correo electrónico</ion-label>  -->
+      <ion-input
+        [type]="showPassword ? 'text':'password'"
+        [(ngModel)]="contrasenia"
+        name="contrasenia"
+      ></ion-input>
+      <ion-icon        slot="end"        [name]="passwordIcon"        (click)="iconPassword()"
+      ></ion-icon>
+    </ion-item>
 
     <div class="ion-text-center ion-margin-top">
-      
-      <a class="content-link" routerLink="/reset-password">
-        <small >¿Olvidó su contraseña?</small>
-      </a>
-      <a class="content-link" routerLink="/reset-password">
-        <small >Registrate</small>
+      <a class="content-link" href="http://axela.pythonanywhere.com/reset/password_reset/" >
+        <small>¿Olvidó su contraseña? Recuperar Contraseña</small>
       </a>
     </div>
-
+    <div class="ion-text-center ion-margin-top">
+      <a class="content-link" routerLink="/register">
+        <small>¿No tienes una cuenta? Registrate</small>
+      </a>
+    </div>
   </div>
-
+  <ion-grid>
+<ion-row>
+    <ion-button (click)="loginFacebook()">
+      <ion-icon name="logo-facebook"></ion-icon>
+    </ion-button>
+    
   
-  <ion-button expand="full" (click)="on_submit_login()" class="boton">
+    <ion-button (click)="loginGoogle()">
+      <ion-icon name="logo-google"></ion-icon>
+    </ion-button>
+  
+</ion-row>
+</ion-grid>
+  <ion-button (click)="on_submit_login()" class="boton">
     INICIAR SESIÓN
   </ion-button>
-
 </ion-content>

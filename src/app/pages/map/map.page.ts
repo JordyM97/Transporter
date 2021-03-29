@@ -133,6 +133,7 @@ export class MapPage implements OnInit,OnDestroy {
             location: location ,
             id: id,
             from: this.authService.nombre,
+            type: 'driver',
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
           })
       }else{

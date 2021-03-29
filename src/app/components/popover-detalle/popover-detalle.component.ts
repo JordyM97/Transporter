@@ -80,7 +80,7 @@ export class PopoverDetalleComponent implements OnInit {
   }
 
   async btnSi(){
-    console.log(this.idCliente);
+    console.log('id cliente '+ this.idCliente);
     this.authService.idCliente=this.idCliente;
    
     //Almacenamiento local de variables para notificaciones
@@ -99,6 +99,7 @@ export class PopoverDetalleComponent implements OnInit {
       inicioCoords: this.inicioCoords,
       finCoords: this.finCoords,
       idConductor: this.servicesDriver.idDriver,
+      iddriver:this.authService.getId(),
       tipoNotificacion: '0' //Indica si es noti de inicio o fin de carrera; 0=inicio 1=finCalificar
     }
     this.enviarNotificacion(this.notificacionCareApp);
@@ -118,7 +119,7 @@ export class PopoverDetalleComponent implements OnInit {
 
   enviarNotificacion(data){
     console.log(data)
-
+    console.log('formadata')
     this.uploadForm.get('service').setValue(localStorage.getItem("idServicio"));
     this.uploadForm.get('driver').setValue(localStorage.getItem("idConductor")); 
     this.uploadForm.get('client').setValue(localStorage.getItem("idCliente")); 
@@ -129,6 +130,10 @@ export class PopoverDetalleComponent implements OnInit {
     formData.append("driver", this.uploadForm.get('driver').value);
     formData.append("client", this.uploadForm.get('client').value);
     formData.append("data", this.uploadForm.get('data').value);
+    for (var value of formData.values()) {
+      console.log('-- '+ value);
+   }
+    
     this.authService.sendNotification(formData);
   }
   

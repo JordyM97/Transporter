@@ -3,29 +3,32 @@ ion-fab-button {
     color: black;
 }
 ion-content{
-    --ion-background-color: #282F69;
+    --background:  #282F69;
 }
 .estrella {
     height: 35px;
     width: 35px;
 }
-
+ion-avatar{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    height: 40%;
+    width: 30%;
+}
 ion-grid {
     //background: linear-gradient(-90deg,#20478B ,#2487C9);
     justify-content: center;
     align-content: center;
     flex-direction: column;
     //color: white;
-    margin-top: 10%;
-    ion-button{
-        --background-color: red;
-        --background: red;
-    }
+    margin-top: 0%;
+    height: 45%;
 }
 
 .estrellas {
     justify-content: center;
-    margin-bottom: 10%;
+    margin-bottom: 5%;
 }
 
 .calificacion {
@@ -34,13 +37,31 @@ ion-grid {
 }
 
 .titulo {
-    font-size: 16px;
+    font-size: 12px;
     margin-left: 25px;
     color: grey;
 }
 
 .respuesta {
-    font-size: 24px;
-    margin-bottom: 15px;
-    margin-left: 25px;
+    font-size: 18px;
+    justify-content: center;
+    color: white;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+.respuesta2 {
+    font-size: 14px;
+    justify-content: center;
+    color: white;
+    font-weight: normal;
+}
+.name{
+    padding-top: 20px;
+}
+ion-buttons{
+    height: 20px;
+}
+ion-menu-button{ 
+    --color: white  !important;
 }

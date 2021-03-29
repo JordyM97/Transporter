@@ -5,16 +5,50 @@
 
 <ion-content>
   <div id="body-content">
-    <p><strong>Inicio: </strong>{{inicio}}</p>
-    <p><strong>Fin: </strong>{{fin}}</p>
-    <p><strong>Fecha y hora: </strong>{{fecha}} - {{hora}}</p>
-    <p><strong>Método de Pago: </strong>{{metodoPago}}</p>
-    <p><strong>Cliente: </strong>{{cliente}}</p>
-    <p><strong>Valor: </strong>${{valor}}</p>
+    <ion-grid>
+     <ion-row>
+        <ion-col>
+          <ion-row><ion-label class="titulo">Inicio:</ion-label></ion-row>
+          <ion-row><ion-label>{{inicio}}</ion-label></ion-row>
+        </ion-col>
+  
+        <ion-col>
+          <ion-row><ion-label class="titulo">Fin:</ion-label></ion-row>
+          <ion-row><ion-label>{{fin}}</ion-label></ion-row>
+          
+        </ion-col>
+      </ion-row>
+  
+      <ion-row>
+        <ion-col>
+          <ion-row><ion-label class="titulo">Método de Pago:</ion-label></ion-row>
+          <ion-row><ion-label>{{metodoPago}}</ion-label></ion-row>
+        </ion-col>
+  
+        <ion-col>
+          <ion-row><ion-label class="titulo">Fecha y Hora:</ion-label></ion-row>
+          <ion-row><ion-label>{{fecha}} - {{hora}}</ion-label></ion-row>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row>
+        <ion-col>
+          <ion-row><ion-label >Valor:</ion-label></ion-row>
+          <ion-row><ion-label class="precio">${{valor}}</ion-label></ion-row>
+        </ion-col>
+  
+        <ion-col>
+          <ion-row><ion-label class="titulo">Cliente:</ion-label></ion-row>
+          <ion-row><ion-label>{{cliente}}</ion-label></ion-row>
+        </ion-col>
+      </ion-row>
+  
+    </ion-grid>
+    
   </div>
   <p id="preg">¿Desea aceptar el servicio?</p>
 <div id="buttons-content">
-  <ion-button class="btn-mapa" (click)="btnMapa()">Mapa</ion-button> 
+  <ion-button class="btn-mapa" (click)="btnSi()">Mapa</ion-button> 
   <ion-button class="btn-si" (click)="btnSi()">SI</ion-button>
   <ion-button class="btn-no" (click)="btnNo()">NO</ion-button>
   

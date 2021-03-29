@@ -75,7 +75,7 @@ export class ChatService {
     this.messagesCollection = this.afs.collection<any>(`/chatRoomsTest/${chatRoom}/messages`,(ref)=>ref.orderBy('createdAt'));
     return this.messagesCollection.valueChanges();
   }
-  addPosition(id:string,location:string){
+ /** addPosition(id:string,location:string){
     this.afs.collection(`/posicion/${id}`, ref => ref.where('id', "==", id)).snapshotChanges().subscribe(res => {
       if (res.length > 0)      {
         this.afs.doc(`/posicion/${id}`).set({ location: location }, { merge: true });
@@ -91,6 +91,7 @@ export class ChatService {
       }
   });  
   }
+   */
  
   addChatMessage(chatRoom:string,msg:string){
     return this.afs.collection(`/chatRoomsTest/${chatRoom}/messages`).add(

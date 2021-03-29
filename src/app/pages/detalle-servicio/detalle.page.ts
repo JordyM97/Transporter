@@ -132,8 +132,8 @@ export class DetallePage implements OnInit,OnDestroy {
     await google.maps.event.addListenerOnce(this.mapa, 'idle', () => {
       console.log(this.shareData.notificacion);
       
-      this.origin=this.shareData.notificacion.data.inicioCoords;
-      this.destination=this.shareData.notificacion.data.finCoords;
+      this.origin=this.shareData.notificacion.data.coordStart;
+      this.destination=this.shareData.notificacion.data.coordEnd;
       mapEle.classList.add('show-map');
       this.calculateRoute(this.origin,this.destination);
     });    
@@ -191,6 +191,7 @@ export class DetallePage implements OnInit,OnDestroy {
             location: location ,
             id: id,
             from: this.authService.nombre,
+            type: 'driver',
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
           })
       }else{
@@ -238,7 +239,7 @@ export class DetallePage implements OnInit,OnDestroy {
 
   async presentPopoverInicio() {
     this.notificacionCareAppInicio = {  /*VALOR DE PRUEBA*/
-      tipoNotificacion: '2' //Indica si es noti de inicio o fin de carrera; 0=inicio 1=finCalificar
+      tipoNotificacion: '2' //Indica si es noti de inicio o fin de carrera; 0=inicio 1=finCalificar 2=aceptada
     }
     this.enviarNotificacionInicio(this.notificacionCareAppInicio);
     const popover = await this.popoverController.create({
@@ -309,6 +310,7 @@ export class DetallePage implements OnInit,OnDestroy {
     formData.append("driver", this.notificacionCalificar.get('driver').value);
     formData.append("client", this.notificacionCalificar.get('client').value);
     formData.append("data", this.notificacionCalificar.get('data').value);
+    console.log(this.notificacionCalificar.get('data').value)
     this.authService.sendNotificationEnd(formData);
   }
   

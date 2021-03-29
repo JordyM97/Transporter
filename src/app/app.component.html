@@ -26,8 +26,12 @@
               <ion-icon name="person"></ion-icon>Mi perfil
             </ion-item>
           </ion-menu-toggle>
-          
-          <<ion-menu-toggle routerLink="/historial/">
+          <ion-menu-toggle routerLink="/map">
+            <ion-item color=“transparent”>
+              <ion-icon name="car-outline"></ion-icon>Menú principal
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle routerLink="/historial/">
             <ion-item color=“transparent”>
               <ion-icon name="document-text-outline"></ion-icon>Mi historial de servicios
             </ion-item>
@@ -50,6 +54,27 @@
             </ion-item>
           </ion-menu-toggle>
  -->
+    <ion-menu-toggle>
+      <ion-item color="transparent"> 
+    
+        <ion-grid >
+         <ion-row class="rowcenter">
+           <ion-text>Patrocinado por</ion-text>
+          </ion-row>
+          <ion-row style="padding-left: 10%;">
+            <ion-col size="3" expand="full">      <ion-item>         <ion-icon name="cloud-done-outline"></ion-icon>            </ion-item></ion-col>   
+            <ion-col size="3" expand="full">      <ion-item>         <ion-icon name="cloud-done-outline"></ion-icon>            </ion-item></ion-col>
+            <ion-col size="3" expand="full">      <ion-item>         <ion-icon name="cloud-done-outline"></ion-icon>            </ion-item> </ion-col>
+          </ion-row>
+        </ion-grid>          
+        </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle  routerLink="/login">
+            <ion-item  color="transparent" (click)="on_logout()">  
+            <ion-icon name="receipt-outline"></ion-icon> Cerrar Sesion
+   
+            </ion-item>
+          </ion-menu-toggle>
         </ion-list>
 
         <div class="out-content">

@@ -90,7 +90,7 @@ export class FcmService {
     PushNotifications.addListener('pushNotificationReceived',
     async (notification:  PushNotification) => {
         let origin=JSON.parse(notification.data.coordStart);
-        console.log(notification.data.pk);
+        console.log('Carrera: '+notification.data.pk);
         localStorage.setItem("uidClient", notification.data.uidClient);
         console.log('Inicio> ',typeof(origin))//object
         console.log('Inicio> ',typeof(origin.lat))
@@ -115,7 +115,7 @@ export class FcmService {
           'metodoPago':notification.data.idTypePayment,
           'valor':notification.data.amountPayment,
           'cliente':this.DriverService.getNameClient()+" "+this.DriverService.getLastNameClient(),
-          'idCliente':notification.data.idClientService,
+          'idCliente':this.authService.idCliente,   //notification.data.idClientService,    --> id de la tabla client
           'pkServicio':notification.data.pk
         }
 
@@ -165,7 +165,7 @@ export class FcmService {
               'metodoPago':notification.notification.data.idTypePayment,
               'valor':notification.notification.data.amountPayment,
               'cliente':this.DriverService.getNameClient()+" "+this.DriverService.getLastNameClient(),
-              'idCliente':notification.notification.data.idClientService,
+              'idCliente':this.authService.idCliente,   //notification.data.idClientService,    --> id de la tabla client notification.notification.data.idClientService,
               'pkServicio':notification.notification.data.pk
             }
             localStorage.setItem('idCliente',notification.notification.data.idClientService);           

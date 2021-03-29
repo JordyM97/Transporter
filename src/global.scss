@@ -79,7 +79,7 @@
     --width:100vw;
   }
   .my-custom-class{
-    --width:75vw;
+    --width:85vw;
     #header-card{
       /*text-align: left;
       background: linear-gradient(-90deg,#20478B ,#2487C9);    
@@ -87,13 +87,15 @@
       font-size: 12px;
       height: 50px;*/
 
-      background: linear-gradient(-90deg,#20478B ,#2487C9);    
+      background: #282F69;    
       color:white;
       justify-content: center;
-      height: 50px;
+      height: 40px;
       ion-title{
         font-size: 13px;
         padding-top: 5%;
+        text-transform: uppercase;
+        text-align: center;
       }
     }
     #body-content{

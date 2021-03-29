@@ -6,9 +6,9 @@ import { EventEmitter } from '@angular/core';
 
 enum COLORS {
   GREY = "#E0E0E0",
-  GREEN = "#76FF03",
-  YELLOW = "#FFCA28",
-  RED= "#DD2C00"
+  GREEN = "#BD1818",
+  YELLOW = "#BD1818",
+  RED= "#BD1818"     //#DD2C00
 }
 
 @Component({
