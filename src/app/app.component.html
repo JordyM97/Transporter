@@ -21,12 +21,8 @@
         </ion-menu-toggle>
 
         <ion-list lines="none" class="menu-items" color=“transparent”>
-          <ion-menu-toggle>
-            <ion-item color=“transparent”>
-              <ion-icon name="person"></ion-icon>Mi perfil
-            </ion-item>
-          </ion-menu-toggle>
-          <ion-menu-toggle routerLink="/map">
+          
+          <ion-menu-toggle routerLink="/tabs/map">
             <ion-item color=“transparent”>
               <ion-icon name="car-outline"></ion-icon>Menú principal
             </ion-item>
@@ -37,7 +33,7 @@
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle>
-            <ion-item color=“transparent” (click) = "getPoliticas()">
+            <ion-item color=“transparent” (click) = "ggetPoliticas()">
               <ion-icon name="newspaper-outline"></ion-icon>Términos y condiciones
             </ion-item>
           </ion-menu-toggle>

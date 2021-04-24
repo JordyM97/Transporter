@@ -15,6 +15,7 @@ export class PerfilPage implements OnInit {
   private idCliente: any;
   private calificacion = 0;
   private calificacionStr;
+  public user: any;
   public img:string="https://firebasestorage.googleapis.com/v0/b/vehicular-287023.appspot.com/o/profile%2F24%2Fprofile.jpg?alt=media&token=b7f2e110-bde3-4d30-a509-9ccb27c122ea";
   constructor(
     public authService: AuthService,
@@ -32,6 +33,7 @@ export class PerfilPage implements OnInit {
     this.apellido = this.DriverService.getLastName();
     this.correo = this.DriverService.getEmail();
     this.getRateUser();
+    this.user=this.authService.userinfo;
     
     }
     async uploadImg(){

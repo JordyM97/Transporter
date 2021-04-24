@@ -93,7 +93,13 @@ export class AppComponent implements OnInit {
   }
 
   on_logout(){
-    this.AFauth.logout();
+    //this.AFauth.logout();
+    
+      this.authservice.logout();
+      this.router.navigateByUrl("login");
+      localStorage.clear();
+      
+    
   }
 
   async presentPopoverDetalle(notification) {

@@ -154,9 +154,10 @@
     #header-card{
       
       //display: flex;
-      background: linear-gradient(-90deg,#20478B ,#2487C9);    
+      background: #282F69;    
       color:white;
       justify-content: center;
+      text-align: center;
       height: 50px;
       ion-title{
         font-size: 13px;
@@ -190,4 +191,7 @@
     
     //padding-top: 10%;
   }
+  ion-menu-button{
+    color:white
+}
 

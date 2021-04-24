@@ -26,6 +26,7 @@ export class AuthService {
   public historial : Array<any>;
   public userApp: User;
   public currentUser:any;
+  public userinfo:any;
   servicios: Observable<any[]>;
   serviciosCollection: AngularFirestoreCollection<any>;
 
@@ -169,7 +170,9 @@ export class AuthService {
  
         this.http.post('https://axela.pythonanywhere.com/api/rest-auth/', credentials, {headers: headers}) //http://127.0.0.1:8000
           .subscribe(res => {
+            console.log(res);
             let data = JSON.parse(JSON.stringify(res));
+            this.userinfo=data;
             this.id=data.id;
             this.token = data.token;
             localStorage.setItem("token",data.token); //Local Storage para el token
@@ -185,10 +188,16 @@ export class AuthService {
             console.log(data);
             resolve("ok");
             }, (err) => {
-            console.log(err);
+            console.log(err.error);
+            if(err.error!=null){
+              //err.error.non_field_errors
+              alert(err.error.non_field_errors)
+            }
+            
             //resolve("ok");
             resolve("bad");
-          });  });
+          })
+        });
  
   }
 
@@ -211,6 +220,20 @@ export class AuthService {
 
         }
       )
+  }
+  onlogout(){
+    return new Promise((resolve, reject) => {
+      let headers = new HttpHeaders();
+      headers = headers.set('content-type','application/json').set('Authorization', String(this.token));  
+      this.http.delete('https://axela.pythonanywhere.com/api/devices/delete/'+String(this.id)+'/', {headers: headers}) //http://127.0.0.1:8000
+        .subscribe(res => {
+          let data = JSON.parse(JSON.stringify(res));
+          resolve("ok");
+          this.nombre="Invitado"; this.id="";this.historial=null;//this.token=""; this.nombre="Invitado"; this.apellido=""; this.correo=""; this.deviceToken="";
+          }, (err) => {
+         // console.log(err);
+          resolve("bad");
+        });  });      
   }
 
   /**

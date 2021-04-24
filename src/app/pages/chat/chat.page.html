@@ -6,27 +6,36 @@
       </ion-button>
 
 
-      <img class="center-img" src="assets/imgs/logf.png"> <!--"assets/imgs/LOGO1.png-->
+      <img class="center-img" src="assets/imgs/logw.png"> <!--"assets/imgs/LOGO1.png-->
     </div>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content padding>
   
-<!-- List of Text Items -->
-<ion-list>
-    <ion-item *ngFor = "let chat of chatRooms" (click)="openChat(chat)">
-      <ion-avatar slot="start">
-        <!-- <ion-img [src]="chat.img"></ion-img> -->
-      </ion-avatar>
-      <ion-label>
-        <h2>{{chat.client}}</h2>
-        <h3></h3>
-        <p>{{chat.descripcion}}</p>
-        <p>{{chat.dateStart?.toMillis() | date:'short'}}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-  
-</ion-content>
+  <!-- List of Text Items -->
+  <ion-list>
+      
+      <ion-item *ngFor = "let chat of chatRooms" (click)="openChat(chat)">
+        <ion-grid>
+          <ion-row>
+            <div class="s"></div>
+            <ion-avatar>            <img src="assets/imgs/user.png">          </ion-avatar>
+            <ion-col>
+              <ion-label>
+                <h2>{{chat.driver}}</h2>
+                <p>{{chat.descripcion}}</p>
+                <p>{{chat.dateStart?.toMillis() | date:'short'}}</p>
+              </ion-label>
+              
+            </ion-col>  
+                            
+          </ion-row>
+          
+        </ion-grid>
+        <div class="label"></div>  
+      </ion-item>
+    </ion-list>
+    <!--ion-button (click)="createRoom()">Crear</ion-button-->
+    
+  </ion-content>

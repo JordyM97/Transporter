@@ -122,7 +122,7 @@ export class PopoverDetalleComponent implements OnInit {
     console.log('formadata')
     this.uploadForm.get('service').setValue(localStorage.getItem("idServicio"));
     this.uploadForm.get('driver').setValue(localStorage.getItem("idConductor")); 
-    this.uploadForm.get('client').setValue(localStorage.getItem("idCliente")); 
+    this.uploadForm.get('client').setValue(6); 
     this.uploadForm.get('data').setValue(JSON.stringify(data));
 
     var formData: any = new FormData();

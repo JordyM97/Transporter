@@ -1,12 +1,13 @@
-<ion-content>
-  <div class="top">
-    <p>BIENVENIDOS!</p>
-    <ion-img class="icon" src="assets/imgs/logi.png">  </ion-img>
-  </div>
 
+<ion-content>
+ 
+  <div class="head">
+    <p>BIENVENIDOS!</p>
+    <ion-img class="icon" src="assets/imgs/efletes-02.png"></ion-img>
+  </div>
+  
   <div class="content-items">
     <ion-item>
-      
       <ion-input
         type="text"
         [(ngModel)]="correo_electronico"
@@ -16,25 +17,21 @@
 
     <ion-item>
       <!--<ion-label position="floating"> Correo electrónico</ion-label>  -->
-      <ion-input
+      <ion-input class="passicon"
         [type]="showPassword ? 'text':'password'"
         [(ngModel)]="contrasenia"
         name="contrasenia"
       ></ion-input>
-      <ion-icon        slot="end"        [name]="passwordIcon"        (click)="iconPassword()"
+      <ion-icon class="passicon"       slot="end"        [name]="passwordIcon"        (click)="iconPassword()"
       ></ion-icon>
     </ion-item>
 
     <div class="ion-text-center ion-margin-top">
       <a class="content-link" href="http://axela.pythonanywhere.com/reset/password_reset/" >
-        <small>¿Olvidó su contraseña? Recuperar Contraseña</small>
+        <small>¿Olvidó su contraseña?</small>
       </a>
     </div>
-    <div class="ion-text-center ion-margin-top">
-      <a class="content-link" routerLink="/register">
-        <small>¿No tienes una cuenta? Registrate</small>
-      </a>
-    </div>
+    
   </div>
   <ion-grid>
 <ion-row>

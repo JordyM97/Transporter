@@ -6,14 +6,9 @@
       </ion-button>
 
 
-      <ion-title class="ion-text-center" text-capitalize>
-        Servicio en curso
+      <ion-title text-capitalize>
+        SERVICIO EN CURSO
       </ion-title>
-
-
-      <ion-avatar>
-        <img src="assets/icon/avatar.png">
-      </ion-avatar>
 
     </div>
   </ion-toolbar>
@@ -22,17 +17,18 @@
 <ion-content>
   <div id="mapa"></div>
   <div id="header">
-    <h3>DETALLE DEL SERVICIO</h3>
+    <p>DETALLE DEL SERVICIO</p>
   </div>
 
   <div id="content">
-    <ion-row><strong>Inicio: </strong>{{shareData.inicio}}</ion-row>
-    <ion-row><strong>Fin: </strong>{{shareData.fin}}</ion-row>
-    <ion-row><strong>Fecha y hora: </strong> {{shareData.detalleServicio.fecha}} - {{shareData.detalleServicio.hora}}</ion-row>
-    <ion-row><strong>Método de Pago: </strong>{{shareData.detalleServicio.metodoPago}}</ion-row>
+    
+    <ion-row><strong>INICIO: </strong>{{shareData.inicio}}</ion-row>
+    <ion-row><strong>FIN: </strong>{{shareData.fin}}</ion-row>
+    <ion-row><strong>FECHA Y HORA: </strong> {{shareData.detalleServicio.fecha}} - {{shareData.detalleServicio.hora}}</ion-row>
+    <ion-row><strong>METODO DE PAGO: </strong>{{shareData.detalleServicio.metodoPago}}</ion-row>
     <ion-row>
-      <ion-col><strong>Cliente: </strong>{{shareData.detalleServicio.cliente}}</ion-col>
-      <ion-col><strong>Valor: </strong>${{shareData.detalleServicio.valor}}</ion-col>
+      <ion-col><strong>CLIENTE: </strong>{{shareData.detalleServicio.cliente}}</ion-col>
+      <ion-col><strong>VALOR: </strong>${{shareData.detalleServicio.valor}}</ion-col>
     </ion-row>    
   </div>
 

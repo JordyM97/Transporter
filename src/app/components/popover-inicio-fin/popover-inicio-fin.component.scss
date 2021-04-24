@@ -1,0 +1,20 @@
+.center{
+    width: 26vw;
+    height: 26vw;
+}
+.name{
+    padding-bottom: 13px;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+ion-icon {
+    font-size: 37px;
+}
+ion-title{
+    padding: 20px 0px 20px 0px;
+    font-size: 28px;
+}
+ion-item{
+    height: 30vw;
+    --border-width: 0px 0px 0px 0px !important; 
+}

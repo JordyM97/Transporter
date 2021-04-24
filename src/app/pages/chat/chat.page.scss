@@ -1,0 +1,39 @@
+ion-item{
+    color: black !important;
+    background-color: white;
+    background: white;
+    border-radius: 12px;
+   // border: 1px solid black;
+    padding-top: 3px;
+    margin: 4px;
+    p{
+        color:black
+    }
+    h2{
+        text-transform: uppercase;
+    }
+}
+ion-list{
+    height: 100%;
+    background-color: white;
+    padding-bottom: 10px;
+    overflow-y:scroll !important;
+}
+ion-img{
+    width: 40px;
+    height: 40px;
+}
+ion-avatar{
+    margin: 10px;
+}
+.label{
+    background: #282F69;
+    width:20px;
+}
+.s{
+    width: 05px;
+    background-color: red;
+}
+ion-menu-button{
+    color:white
+}
