@@ -10,5 +10,30 @@
 .header{
   background-color: #282F69;
 }
-
+.toolbar-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: full;
+  padding-right: 5%;
+  align-items: center;
+  ion-title {
+      font-weight: 100;
+      font-size: 14px;
+      color: white;
+      justify-self: center;
+  }
+  ion-avatar {
+      width: 30px;
+      height: 30px;
+      justify-self: flex-end;
+      align-self: center;
+  }
+  ion-back-button {
+      --color: white;
+  }
+  ion-content {
+      --background: #ffffff;
+  }
+}
 

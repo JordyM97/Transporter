@@ -128,14 +128,7 @@ export class AppComponent implements OnInit {
   }
 
   getPoliticas(){
-    console.log("POLITICAS:")
-    this.politicas=(this.httpService.getPoliticas());
-    this.politicas.subscribe(
-      res => {
-        console.log(res);
-        this.presentModal(res);
-      }
-    );
+    this.authservice.getPoliticas();
   }
 
   async presentModal(res) {

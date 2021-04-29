@@ -1,0 +1,56 @@
+
+<ion-content>
+  <h2 style="text-align: center;">TERMINOS Y CONDICIONES</h2>
+ 
+  <ion-grid>
+    <div>
+      <h4 style="text-align: center;">
+        {{politi.title}}
+      </h4>
+    </div>
+    <div>
+      <b class=".ion-text-justify">
+        {{politi.t1}}
+      </b >
+    </div>
+    <ion-row>
+      <ion-text class=".ion-text-justify">
+        {{politi.p1}}
+      </ion-text>
+    </ion-row>
+    <br>
+    <div>
+      <b>
+        {{politi.t2}}
+      </b>
+    </div>
+    <ion-row>
+      <ion-text class=".ion-text-justify">
+        {{politi.p2}}
+      </ion-text>
+    
+    </ion-row>
+    <br>  
+    <div>
+      <b>
+        {{politi.t3}}
+      </b>
+    </div>
+    <ion-row>
+      <ion-text class=".ion-text-justify">
+        {{politi.p3}}
+      </ion-text>
+    </ion-row>
+    
+  </ion-grid>
+  <div style="display: none;">
+    <ion-button class="btn" (click)='btnSi()'>
+      Comprendo y acepto
+    </ion-button>
+    <ion-button class="btn" (click)='btnNo()'>
+      No Acepto
+    </ion-button>
+  </div>
+  
+
+</ion-content>

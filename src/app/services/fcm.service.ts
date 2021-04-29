@@ -89,6 +89,7 @@ export class FcmService {
 
     PushNotifications.addListener('pushNotificationReceived',
     async (notification:  PushNotification) => {
+        console.log("Recibiste una notificacion", JSON.stringify(notification.data))
         let origin=JSON.parse(notification.data.coordStart);
         console.log('Carrera: '+notification.data.pk);
         localStorage.setItem("uidClient", notification.data.uidClient);
@@ -136,6 +137,8 @@ export class FcmService {
 
     PushNotifications.addListener('pushNotificationActionPerformed',
       async (notification: PushNotificationActionPerformed) => {
+        
+        console.log("Recibiste una notificacion", notification.notification.data)
         //alert('Push action performed: ' + JSON.stringify(notification));
         
         if (notification.notification.data) {

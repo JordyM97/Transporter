@@ -91,7 +91,7 @@ export class ChatService {
       }
   });  
   }
-   */
+   */ 
  
   addChatMessage(chatRoom:string,msg:string){
     return this.afs.collection(`/chatRoomsTest/${chatRoom}/messages`).add(

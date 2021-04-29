@@ -5,11 +5,12 @@ import { AngularFireAuth } from '@angular/fire/auth'
 import { Router } from '@angular/router';
 import { isNullOrUndefined } from 'util';
 
-import { ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { User } from '../interfaces/user';
 import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { TerminosComponent } from '../pages/terminos/terminos.component';
 
 
 @Injectable({
@@ -34,7 +35,7 @@ export class AuthService {
     private AFauth: AngularFireAuth,
     private router: Router,
     public toastController: ToastController,
-    public http: HttpClient,private firestore: AngularFirestore
+    public http: HttpClient,private firestore: AngularFirestore,private modalCtrl:ModalController
   ) {
     this.getCurrentUser();
     this.historial = [];
@@ -292,5 +293,22 @@ export class AuthService {
 
   getId(){
     return this.id;
+  }
+  getPoliticas(){
+    console.log("POLITICAS")
+    this.presentModal();
+     
+  }
+
+  async presentModal() {
+    const modal = await this.modalCtrl.create({
+      component: TerminosComponent,
+      cssClass: 'TermsModal',
+      componentProps: {
+        
+      },
+      swipeToClose: false,
+    });
+    return await modal.present();
   }
 }

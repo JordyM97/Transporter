@@ -32,7 +32,7 @@ export class PerfilPage implements OnInit {
     this.nombre = this.DriverService.getName();
     this.apellido = this.DriverService.getLastName();
     this.correo = this.DriverService.getEmail();
-    this.getRateUser();
+    //this.getRateUser();
     this.user=this.authService.userinfo;
     
     }

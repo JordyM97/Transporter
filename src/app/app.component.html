@@ -1,87 +1,83 @@
 <ion-app>
   <ion-menu side="start" menuId="first" contentId="main">
-
     <ion-content>
       <div class="menu-bg">
-
         <ion-menu-toggle routerLink="/perfil">
-          <div style="background-color: white;     padding: 10% 15% 0px 15%;">
-            <ion-img class="icon" src="assets/imgs/logf.png">  </ion-img>
-          </div>
-          <div class="menu-header-content" >
-            
-            <ion-avatar  >
-              <img src="assets/imgs/user.png">
-            </ion-avatar>
-            <label>
-              <h4>{{username}}</h4>
-            </label>
-          
-          </div>
-        </ion-menu-toggle>
-
+        <div class="logo">
+          <ion-img src="assets/imgs/logf.png">  </ion-img>
+        </div>
+        <div class="menu-header-content" >
+          <ion-avatar  >
+            <img src="assets/imgs/user.png">
+          </ion-avatar>
+          <label>
+            <h4  class="username">{{username}}</h4>
+          </label>
+        
+        </div>
+      </ion-menu-toggle>  
         <ion-list lines="none" class="menu-items" color=“transparent”>
-          
-          <ion-menu-toggle routerLink="/tabs/map">
+          <ion-menu-toggle routerLink="/home">
             <ion-item color=“transparent”>
               <ion-icon name="car-outline"></ion-icon>Menú principal
             </ion-item>
           </ion-menu-toggle>
+
+
+          
+          
+
+          <ion-menu-toggle routerLink="news">
+            <ion-item color=“transparent”>
+              <ion-icon name="document-text-outline"></ion-icon>Noticias
+            </ion-item>
+          </ion-menu-toggle>
+
           <ion-menu-toggle routerLink="/historial/">
             <ion-item color=“transparent”>
-              <ion-icon name="document-text-outline"></ion-icon>Mi historial de servicios
-            </ion-item>
-          </ion-menu-toggle>
-          <ion-menu-toggle>
-            <ion-item color=“transparent” (click) = "ggetPoliticas()">
-              <ion-icon name="newspaper-outline"></ion-icon>Términos y condiciones
-            </ion-item>
-          </ion-menu-toggle>
-
-  <!--         <ion-menu-toggle>
-            <ion-item color=“transparent” button (click)="presentPopoverInicio()">
-              <ion-icon name="pin-outline"></ion-icon>Iniciar Servicio
+              <ion-icon name="folder-open-outline"></ion-icon>Historial
             </ion-item>
           </ion-menu-toggle>
 
           <ion-menu-toggle>
-            <ion-item color=“transparent” button (click)="presentPopoverFin()">
-              <ion-icon name="stop-circle-outline"></ion-icon>Finalizar Servicio
+            <ion-item color="transparent" (click)="getPoliticas()">  <!--  getPoliticas()-->
+              <ion-icon name="receipt-outline"></ion-icon>Terminos y Condiciones
             </ion-item>
           </ion-menu-toggle>
- -->
-    <ion-menu-toggle>
-      <ion-item color="transparent"> 
-    
-        <ion-grid >
-         <ion-row class="rowcenter">
-           <ion-text>Patrocinado por</ion-text>
-          </ion-row>
-          <ion-row style="padding-left: 10%;">
-            <ion-col size="3" expand="full">      <ion-item>         <ion-icon name="cloud-done-outline"></ion-icon>            </ion-item></ion-col>   
-            <ion-col size="3" expand="full">      <ion-item>         <ion-icon name="cloud-done-outline"></ion-icon>            </ion-item></ion-col>
-            <ion-col size="3" expand="full">      <ion-item>         <ion-icon name="cloud-done-outline"></ion-icon>            </ion-item> </ion-col>
-          </ion-row>
-        </ion-grid>          
-        </ion-item>
+         
+          <!--<ion-menu-toggle routerLink="/acerca">
+            <ion-item color=“transparent” button (click)="presentAlertFin()">
+              <ion-icon name="stop-circle-outline"></ion-icon>Acerca
+            </ion-item>
           </ion-menu-toggle>
-          <ion-menu-toggle  routerLink="/login">
-            <ion-item  color="transparent" (click)="on_logout()">  
+          -->
+          <div class="bottom">
+          <ion-menu-toggle>
+          <ion-item color="transparent"> 
+            
+              <ion-grid >
+                <ion-row class="rowcenter">
+                  <ion-text>Patrocinado por</ion-text>
+                </ion-row>
+                <ion-row style="padding-left: 10%;">
+                  <ion-col size="3" expand="full">      <ion-item>         <ion-icon name="cloud-done-outline"></ion-icon>            </ion-item></ion-col>   
+                  <ion-col size="3" expand="full">      <ion-item>         <ion-icon name="cloud-done-outline"></ion-icon>            </ion-item></ion-col>
+                  <ion-col size="3" expand="full">      <ion-item>         <ion-icon name="cloud-done-outline"></ion-icon>            </ion-item> </ion-col>
+                </ion-row>
+              </ion-grid>          
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle  routerLink="/login">
+          <ion-item  color="transparent" (click)="on_logout()">  
             <ion-icon name="receipt-outline"></ion-icon> Cerrar Sesion
-   
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-
-        <div class="out-content">
-          <hr>
-          <ion-menu-toggle>
-            <ion-text color=“transparent” (click)="on_logout()">
-              <span class="text"> CERRAR SESIÓN</span>
-            </ion-text>
-          </ion-menu-toggle>
+           
+          </ion-item>
+        </ion-menu-toggle>
         </div>
+        </ion-list>
       </div>
+
+        
 
     </ion-content>
   </ion-menu>
