@@ -53,10 +53,10 @@ export class AuthService {
     this.http.post('https://axela.pythonanywhere.com/api/acceptService/', notificacion, {headers: headers}) //http://127.0.0.1:8000
       .subscribe(res => {
         let data = JSON.parse(JSON.stringify(res));
-        console.log(data);
+        console.log("Respuesta de API AcceptSerice ",data);
         resolve("ok");
         }, (err) => {
-        console.log(err);
+        console.log("Error al  AcceptService",err);
         //resolve("ok");
         resolve("bad");
       });  });
@@ -97,7 +97,7 @@ export class AuthService {
         resolve("bad");
       });  });
   }
-  getUserId(id:any){ 
+  async getUserId(id:any){ 
     return new Promise((resolve, reject) => {
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', 'token '+String(this.token));

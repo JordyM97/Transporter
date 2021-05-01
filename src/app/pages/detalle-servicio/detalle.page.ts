@@ -96,7 +96,8 @@ export class DetallePage implements OnInit,OnDestroy {
       service: [''],
       driver: [''],
       client: [''],
-      data: ['']
+      data: [''],
+      rate: ['']
     });
   } 
 
@@ -264,7 +265,7 @@ export class DetallePage implements OnInit,OnDestroy {
     this.enviarNotificacionFin(this.notificacionCareAppFin);
     const popover = await this.popoverController.create({
       component: PopoverFinComponent,
-      cssClass: 'notification-class',
+      cssClass: 'servicioasignado',
       componentProps:{
          title:"FIN DEL SERVICIO",
          body:"Ha llegado al final de la ruta",
@@ -294,13 +295,13 @@ export class DetallePage implements OnInit,OnDestroy {
   }
 
   enviarNotificacionFin(data){
-    console.log(data)
+    console.log("Enviar notificacion de FIn",data)
 
     this.notificacionCalificar.get('service').setValue(localStorage.getItem("idServicio"));
     this.notificacionCalificar.get('driver').setValue(localStorage.getItem("idConductor")); 
     this.notificacionCalificar.get('client').setValue(localStorage.getItem("idCliente")); 
     this.notificacionCalificar.get('data').setValue(JSON.stringify(data));
-
+    this.notificacionCalificar.get('rate').setValue(5);
     localStorage.removeItem("idCliente");
     localStorage.removeItem("idConductor");
     localStorage.removeItem("idServicio");
@@ -310,6 +311,7 @@ export class DetallePage implements OnInit,OnDestroy {
     formData.append("driver", this.notificacionCalificar.get('driver').value);
     formData.append("client", this.notificacionCalificar.get('client').value);
     formData.append("data", this.notificacionCalificar.get('data').value);
+    formData.append("rate",this.notificacionCalificar.get('rate').value)
     console.log(this.notificacionCalificar.get('data').value)
     this.authService.sendNotificationEnd(formData);
   }

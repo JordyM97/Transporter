@@ -197,4 +197,35 @@
   ion-menu-button{
     color:white
 }
+.servicioasignado {
+  ion-popover{
+    --width: 80% !important;
+  }
+  .sc-ion-popover-md-h{
+    --width: 80% !important;
+  }
+  .sc-ion-modal {
+    --width: 80%;
+  }
+  #header-card {
+      text-align: center;
+      background: #282F69;
+      color: white;
+      font-size: 10px;
+  }
+  #body-content {
+      font-size: 20px;
+  }
+  .btn-si {
+      width: 89%;
+      height: 40px;
+  }
+  //.sc-ion-popover-md-h {
+  // --width: 90%; //POPOVERCAMBIO 
+  //   --min-height:30%;
+  ///  --max-height: 30%;
+  //  --box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  //  --backdrop-opacity: var(--ion-backdrop-opacity, 0.32);
+  // }
+}
 

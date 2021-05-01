@@ -52,6 +52,7 @@ export class PopoverDetalleComponent implements OnInit {
     this.inicioCoords = this.navParams.get("inicioCoords")
     this.finCoords = this.navParams.get("finCoords")
     this.pkServicio = this.navParams.get("pkServicio")
+    console.log(this.navParams)
    }
 
   ngOnInit() {
@@ -80,6 +81,7 @@ export class PopoverDetalleComponent implements OnInit {
   }
 
   async btnSi(){
+    console.log('Aceptada la  carrera')
     console.log('id cliente '+ this.idCliente);
     this.authService.idCliente=this.idCliente;
    
@@ -92,7 +94,7 @@ export class PopoverDetalleComponent implements OnInit {
       nombreConductor: this.servicesDriver.getName(),
       apellidoConductor: this.servicesDriver.getLastName(),
       calificacionConductor: '5',
-      telefonoConductor: '0999999999',
+      telefonoConductor: this.authService.userinfo.celular,
       modeloVehiculo: this.servicesDriver.getModel(),
       placaVehiculo: this.servicesDriver.getBrand(),
       colorVehiculo: this.servicesDriver.getColor(),
@@ -103,9 +105,10 @@ export class PopoverDetalleComponent implements OnInit {
       tipoNotificacion: '0' //Indica si es noti de inicio o fin de carrera; 0=inicio 1=finCalificar
     }
     this.enviarNotificacion(this.notificacionCareApp);
+    console.log("UID del Driver",this.authService.userApp.uid)
     
-    this.chatService.addChatRoom(this.authService.userApp.uid+'-'
-    +localStorage.getItem("uidClient")+'-'+this.pkServicio,
+    console.log("UID del Cliente",localStorage.getItem("uidClient"))
+    this.chatService.addChatRoom(this.authService.userApp.uid+'-'+localStorage.getItem("uidClient")+'-'+this.pkServicio,
     this.authService.nombre+' '+this.authService.apellido,
     this.cliente);
     this.router.navigate(['/detalle']);
@@ -117,12 +120,12 @@ export class PopoverDetalleComponent implements OnInit {
     await this.popovercontroller.dismiss();
   }
 
-  enviarNotificacion(data){
-    console.log(data)
-    console.log('formadata')
+  async enviarNotificacion(data){
+    console.log('Datos dl  formData a envir como notificacion')
     this.uploadForm.get('service').setValue(localStorage.getItem("idServicio"));
     this.uploadForm.get('driver').setValue(localStorage.getItem("idConductor")); 
-    this.uploadForm.get('client').setValue(6); 
+    await this.authService.getUserId(localStorage.getItem("idCliente"))
+    this.uploadForm.get('client').setValue(this.authService.idCliente); 
     this.uploadForm.get('data').setValue(JSON.stringify(data));
 
     var formData: any = new FormData();
