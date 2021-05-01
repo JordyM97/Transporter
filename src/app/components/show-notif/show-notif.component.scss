@@ -1,0 +1,26 @@
+.mid{
+   //border: black 1px solid;
+   width: 100vw;
+   //width: 370px;
+   text-align: center;
+   background-color: white;
+   
+}
+ion-row{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+@media screen and (max-width: 1000px){
+   .mid{
+       border: black 1px solid;
+       border-radius: 12px;
+       
+   }
+}
+
+popover-content sc-ion-popover-md{
+   top: 193px; 
+   left: 2px; 
+   transform-origin: left top;
+ }

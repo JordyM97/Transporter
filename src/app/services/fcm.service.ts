@@ -22,6 +22,7 @@ import { PopoverController } from '@ionic/angular';
 import { AuthService } from './auth.service';
 import { not } from '@angular/compiler/src/output/output_ast';
 import { ServicesDriverService } from './services-driver.service';
+import { ShowNotifComponent } from '../components/show-notif/show-notif.component';
 
 @Injectable({
   providedIn: 'root'
@@ -89,52 +90,53 @@ export class FcmService {
 
     PushNotifications.addListener('pushNotificationReceived',
     async (notification:  PushNotification) => {
-      
+
+      if(parseInt(notification.data.tipoNotificacion)==2){
+        console.log(notification.data)
+        this.presentarPopoverNotificacion(notification);
+      }else{
         alert('Notificacion: ' + JSON.stringify(notification));
         console.log("Recibiste una notificacion", JSON.stringify(notification.data))
         let origin=JSON.parse(notification.data.coordStart);
-          console.log('Carrera: '+notification.data.pk);
+        console.log('Carrera: '+notification.data.pk);
         localStorage.setItem("uidClient", notification.data.uidClient);
-       console.log('Inicio> ',typeof(origin))//object
-       console.log('Inicio> ',typeof(origin.lat))
-       let destiny=JSON.parse(notification.data.coordEnd);
-       console.log('Fin> ',typeof(destiny.lng));
-       await this.authService.getUserId(notification.data.idClientService);
-       await this.DriverService.getClientInfo(this.authService.idCliente,this.authService.getToken());
-       console.log(this.DriverService.getNameClient()+" "+this.DriverService.getLastNameClient());
-       let date = new Date(notification.data.startDate);
-       let anio = date.getFullYear(); 
-       let mes = String(date.getMonth() + 1).padStart(2, '0');
-       let dia = String(date.getDate()).padStart(2, '0');
-       let hora = String(date.getHours());
-       let minuto =String(date.getMinutes());
+        console.log('Inicio> ',typeof(origin))//object
+        console.log('Inicio> ',typeof(origin.lat))
+        let destiny=JSON.parse(notification.data.coordEnd);
+        console.log('Fin> ',typeof(destiny.lng));
+        await this.authService.getUserId(notification.data.idClientService);
+        await this.DriverService.getClientInfo(this.authService.idCliente,this.authService.getToken());
+        console.log(this.DriverService.getNameClient()+" "+this.DriverService.getLastNameClient());
+        let date = new Date(notification.data.startDate);
+        let anio = date.getFullYear(); 
+        let mes = String(date.getMonth() + 1).padStart(2, '0');
+        let dia = String(date.getDate()).padStart(2, '0');
+        let hora = String(date.getHours());
+        let minuto =String(date.getMinutes());
 
         let notObjeto = {
           'title':notification.title,
-         'inicio':notification.data.coordStart,
+          'inicio':notification.data.coordStart,
           'fin':notification.data.coordEnd,
           'hora': hora+':'+minuto,
-         'fecha': dia+'/'+mes+'/'+anio,
-         'metodoPago':notification.data.idTypePayment,
+          'fecha': dia+'/'+mes+'/'+anio,
+          'metodoPago':notification.data.idTypePayment,
           'valor':notification.data.amountPayment,
-         'cliente':this.DriverService.getNameClient()+" "+this.DriverService.getLastNameClient(),
+          'cliente':this.DriverService.getNameClient()+" "+this.DriverService.getLastNameClient(),
           'idCliente':this.authService.idCliente,   //notification.data.idClientService,    --> id de la tabla client
-         'pkServicio':notification.data.pk
+          'pkServicio':notification.data.pk
         }
 
         this.shareData.nombreNot$.emit(JSON.stringify(notification));
-
         this.shareData.notObj$.emit(notObjeto);
-//
-       this.shareData.notificacion = notification;
-       this.shareData.detalleServicio=notObjeto;
+        this.shareData.notificacion = notification;
+        this.shareData.detalleServicio=notObjeto;
 
         //this.presentAlertConfirm(notification);
-       this.shareData.inicio=await this.detalle.geocodeLatLng(notification.data.coordStart);
-       this.shareData.fin=await this.detalle.geocodeLatLng(notification.data.coordEnd);
-
-
+        this.shareData.inicio=await this.detalle.geocodeLatLng(notification.data.coordStart);
+        this.shareData.fin=await this.detalle.geocodeLatLng(notification.data.coordEnd);
         this.presentPopoverDetalle(notObjeto);
+      }
       }
     );
 
@@ -232,6 +234,24 @@ export class FcmService {
       },
       mode:"md",
       translucent: true
+    });
+    return await popover.present();
+  }
+
+  async presentarPopoverNotificacion(notification){
+    let title = notification.title;
+    let body = notification.body;
+    const popover = await this.popoverController.create({
+      component: ShowNotifComponent,
+      cssClass: 'servicioasignado',
+      componentProps:{
+        title: title,
+        body: body
+
+      },
+      mode:"md",
+      translucent: true,
+      backdropDismiss: false
     });
     return await popover.present();
   }
