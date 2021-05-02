@@ -22,9 +22,7 @@ export class ChatPage implements OnInit {
     this.chatService.getChatRooms().subscribe(
       chats => {
         console.log("El arreglo de chats",chats)
-        if(chats.length>0){
-          chats=chats.sort((a: any, b: any) => { return Date.parse(a.dateStart) - Date.parse(b.dateStart) });
-        }
+        
         this.chatRooms=chats
       }
     )
