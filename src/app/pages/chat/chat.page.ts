@@ -23,7 +23,7 @@ export class ChatPage implements OnInit {
       chats => {
         console.log("El arreglo de chats",chats)
         if(chats.length>0){
-          chats.sort((a: any, b: any) => { return Date.parse(a.dateStart) - Date.parse(b.dateStart) });
+          chats=chats.sort((a: any, b: any) => { return Date.parse(a.dateStart) - Date.parse(b.dateStart) });
         }
         this.chatRooms=chats
       }
