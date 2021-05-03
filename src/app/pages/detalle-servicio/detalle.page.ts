@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, SimpleChanges } from '@angular/core';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { PopoverController, } from '@ionic/angular';
 import { PopoverInicioFinComponent }from 'src/app/components/popover-inicio-fin/popover-inicio-fin.component';
 import { PopoverFinComponent }from 'src/app/components/popover-fin/popover-fin.component';
@@ -38,7 +38,7 @@ export class DetallePage implements OnInit,OnDestroy {
   //Numero del Cliente, debe llegar en la notificacion
   numberClient:string = "0989878654";
 
-  
+  public chatRooms: any=[];
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
   
@@ -72,7 +72,8 @@ export class DetallePage implements OnInit,OnDestroy {
     private chatService: ChatService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private modal: ModalController,
     ) {
     
   }
@@ -107,10 +108,18 @@ export class DetallePage implements OnInit,OnDestroy {
     .catch(err => console.error('Error launching dialer', err));
   }
 
-  chatWithClient(){
-    return this.callNumber.callNumber(this.numberClient, true)
-    .then(res => console.log('Launched dialer!', res))
-    .catch(err => console.error('Error launching dialer', err));
+  openChat(){
+    let chat=this.chatRooms[0]
+    this.modal.create({
+      component: ChatScreenComponent,
+      componentProps:{
+        chat: chat      
+      }
+    }).then(
+      modal => {
+        modal.present()
+      }
+    )
   }
 
     //Funcion para cargar el mapa y dibujar la mejor ruta

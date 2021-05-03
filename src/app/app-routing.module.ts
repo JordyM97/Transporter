@@ -76,7 +76,11 @@ const routes: Routes = [
   {
     path: 'terminos',
     loadChildren: () => import('./pages/terminos/terminos.component').then( m => m.TerminosComponent)
+  },  {
+    path: 'news',
+    loadChildren: () => import('./pages/news/news.module').then( m => m.NewsPageModule)
   }
+
 
 
 

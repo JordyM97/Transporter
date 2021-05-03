@@ -54,7 +54,7 @@ export class ChatService {
               console.log(this.authService.userApp);
               return (uidCurrent===uidProv || uidCurrent==uidOther)
               
-          });
+          }).sort((a:any, b:any) =>  b.dateStart - a.dateStart);
         }
       )
     )

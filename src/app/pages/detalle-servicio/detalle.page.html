@@ -37,7 +37,7 @@
     <ion-button expand="full" id="finalizar" (click)="presentPopoverFin()" disabled>FINALIZAR</ion-button>
   </div>
 
-  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+  <ion-fab horizontal="end" vertical="center" slot="fixed">
     <ion-fab-button color="light" (click)="callByCellphone()">
       <ion-icon name="share"></ion-icon>
     </ion-fab-button>
@@ -48,7 +48,7 @@
     </ion-fab-list>
     
     <ion-fab-list side="start">
-      <ion-fab-button color="light" (click)="chatWithClient()">
+      <ion-fab-button color="light" (click)="openChat()">
         <ion-icon name="call-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>

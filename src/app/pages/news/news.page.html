@@ -1,0 +1,49 @@
+<ion-header>
+ 
+</ion-header>
+
+<ion-content padding>
+  <ion-toolbar class="toolbar-bg">
+    <ion-buttons slot="start">
+        <ion-menu-button class="ion-margin" fill="clear" color="white" auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="color: white;">Noticias</ion-title>
+    
+</ion-toolbar>
+   
+  
+ 
+  
+  
+   <!--<ion-item *ngFor="let item of items | async">
+      {{item | json}}
+    </ion-item>
+    -->
+    <div id="Noticias">
+      <div class="Noticia" *ngFor="let noti of Noti">
+      <div id="card">
+        <ion-card>
+          <img src="{{noti.img}}" height=300px alt="No Picture">
+          <ion-card-header>
+            <ion-card-title>{{noti.Titulo}}</ion-card-title>
+            <ion-card-subtitle> Valido hasta 08/11/2020</ion-card-subtitle>
+           
+          </ion-card-header>
+          <ion-card-content>{{noti.Cuerpo}}</ion-card-content>
+        </ion-card>
+      </div>
+      </div>
+      <div id="card">
+        <ion-card>
+          <img src="" alt="No Picture">
+          <ion-card-header>
+            <ion-card-title>Chequear este link para lo async</ion-card-title>
+            <ion-card-subtitle> Valido hasta 08/11/2020</ion-card-subtitle>
+           
+          </ion-card-header>
+          <ion-card-content>https://ionicframework.com/docs/api/refresher</ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+    
+</ion-content>
