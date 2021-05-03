@@ -1,0 +1,42 @@
+#mapaHistorial{
+   width: 100%;
+   height: 60%;
+   display: block;
+}
+
+.mid{
+   //border: black 1px solid;
+   width: 99vw;
+   //width: 370px;
+   text-align: center;
+   background-color: white;
+   
+}
+
+.cabecera{
+   height: 40px;
+   background: linear-gradient(-90deg,#20478B ,#2487C9);
+   display: flex;
+   justify-content: center;
+   align-content: center;
+   flex-direction: column;
+   color: white;
+}
+
+.titulo{
+   color: #9A999E;
+}
+ion-row{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.price{
+   font-size: 18px;
+   color: red;
+}
+#botonAceptar{
+   text-align: center;
+   width: 95%;
+   --background: red !important;
+}
