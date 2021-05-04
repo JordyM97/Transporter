@@ -160,10 +160,9 @@ export class ServicesDriverService {
 
   getRecordDriver(id: any, token: any){
     return new Promise((resolve, reject) => {
-      let headers = new HttpHeaders();
-      headers = headers.set('content-type','application/json').set('Authorization', 'token '+String(token));
+      let headers = new HttpHeaders({ "Content-Type": "application/json",  "Authorization": String(token)});
   
-      this.http.get('https://axela.pythonanywhere.com/api/recordService/'+String(id)+'/0/', {headers: headers}) //http://127.0.0.1:8000
+      this.http.get('https://axela.pythonanywhere.com/api/service/?idDriverService='+String(this.idDriver), {headers: headers})  //http://127.0.0.1:8000
         .subscribe(res => {
           let data = JSON.parse(JSON.stringify(res));
           console.log(data)
@@ -171,7 +170,7 @@ export class ServicesDriverService {
             //console.log(element) //Recorrer los elementos del array y extraer la info
             this.historialDriver.push(element);
           });
-          resolve("ok");
+          resolve(this.historialDriver);
           }, (err) => {
           console.log(err);
           //resolve("ok");

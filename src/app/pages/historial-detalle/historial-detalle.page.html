@@ -1,9 +1,70 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>historial-detalle</ion-title>
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar-bg">
+    <div class="toolbar-content">
+      <ion-button fill="clear" slot="start">
+        <ion-menu-button color= "light" slot="start"></ion-menu-button>
+      </ion-button>
+
+
+        <img class="center-img" src="assets/imgs/logf.png">
+     
+
+      <ion-avatar>
+        <img src="assets/icon/avatar.png">
+      </ion-avatar>
+
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+   <div #map id="mapaHistorial"></div>
+   
+  <div class='mid'>
+    <div class="cabecera">
+      Detalles del viaje
+    </div>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-row><ion-label class="titulo">Ubicacion Inicial:</ion-label></ion-row>
+          <ion-row><ion-label>{{historialViaje.startAddress}}</ion-label></ion-row>
+        </ion-col>
+
+        <ion-col> 
+          <ion-row><ion-label class="titulo">Ubicacion Final:</ion-label></ion-row>
+          <ion-row><ion-label>{{historialViaje.endAddress}}</ion-label></ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-row><ion-label class="titulo">Fecha y Hora:</ion-label></ion-row>
+          <ion-row><ion-label>{{anio}}/{{mes}}/{{dia}} -- {{hora}}:{{minuto}}</ion-label></ion-row>
+        </ion-col>
+
+        <ion-col>
+          <ion-row><ion-label class="titulo">Tipo de servicio:</ion-label></ion-row>
+          <ion-row><ion-label>{{historialViaje.idTypeService}}</ion-label></ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-row><ion-label class="titulo">Total:</ion-label></ion-row>
+          <ion-row><ion-label>$4.23</ion-label></ion-row>
+        </ion-col>
+
+        <ion-col>
+          <ion-row><ion-label class="titulo">Estado Servicio:</ion-label></ion-row>
+          <ion-row><ion-label>Finalizado</ion-label></ion-row> <!--Cambiar cuando se tengan los estados del servicio-->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="btns">
+      <ion-button id="botonAceptar" (click)="botonAceptar()">Aceptar</ion-button>
+    </div>
+  </div>
 </ion-content>
