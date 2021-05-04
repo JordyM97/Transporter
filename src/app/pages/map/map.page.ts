@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, Platform } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
@@ -9,6 +9,7 @@ import { ServicesDriverService } from 'src/app/services/services-driver.service'
 //import {PopoverInicioFinComponent}from 'src/app/components/popover-inicio-fin/popover-inicio-fin.component';
 
 import * as firebase from 'firebase';
+import { Router } from '@angular/router';
 declare var google;
 
 //Servicio para compartir data
@@ -32,9 +33,13 @@ export class MapPage implements OnInit,OnDestroy {
     private authService: AuthService,
     private driverService: ServicesDriverService,
     public PopoverController:PopoverController,
-    public firestore: AngularFirestore
+    public firestore: AngularFirestore,
+    public platform:Platform,
+    public router:Router
   ) {
-
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      this.router.navigateByUrl('/tabs/map')
+    });
   }
   ngOnDestroy(){
     this.map=null;
