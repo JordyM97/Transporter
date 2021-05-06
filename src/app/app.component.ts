@@ -43,8 +43,10 @@ import { TerminosCondicionesComponent } from './components/terminos-condiciones/
 })
 export class AppComponent implements OnInit {
    geocoder = new google.maps.Geocoder();
+   isDetalleServicio;
    politicas: Observable<any>;
    username= "Invitado";
+   
   constructor(
     private AFauth: AuthService,
     private platform: Platform,
@@ -66,7 +68,12 @@ export class AppComponent implements OnInit {
     this.initializeApp();
   }
    
-  ngOnInit() {}
+  ngOnInit() {
+    let isDetalleServicio: any = {}
+    isDetalleServicio.isDetalle = false;
+
+    this.isDetalleServicio = JSON.stringify(isDetalleServicio)
+  }
 
   initializeApp() {
     this.platform.ready().then(() => {

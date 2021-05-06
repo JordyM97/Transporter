@@ -14,8 +14,8 @@
 <ion-content padding>
   
   <!-- List of Text Items -->
+  <ion-button *ngIf="isDetalle.isDetalle" expand="full" (click)="back()">Volver a Detalles</ion-button>
   <ion-list>
-      
       <ion-item *ngFor = "let chat of chatRooms" (click)="openChat(chat)">
         <ion-grid>
           <ion-row>

@@ -109,17 +109,9 @@ export class DetallePage implements OnInit,OnDestroy {
   }
 
   openChat(){
-    let chat=this.chatRooms[0]
-    this.modal.create({
-      component: ChatScreenComponent,
-      componentProps:{
-        chat: chat      
-      }
-    }).then(
-      modal => {
-        modal.present()
-      }
-    )
+    let isDetalleServicio: any = {}
+    isDetalleServicio.isDetalle = true;
+    this.router.navigate(['chat/'+JSON.stringify(isDetalleServicio)])
   }
 
     //Funcion para cargar el mapa y dibujar la mejor ruta

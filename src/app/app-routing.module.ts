@@ -36,7 +36,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
   },
   {
-    path: 'chat',
+    path: 'chat/:datos',
     loadChildren: () => import('./pages/chat/chat.module').then( m => m.ChatPageModule)
   },
   {
@@ -76,7 +76,8 @@ const routes: Routes = [
   {
     path: 'terminos',
     loadChildren: () => import('./pages/terminos/terminos.component').then( m => m.TerminosComponent)
-  },  {
+  },
+  {
     path: 'news',
     loadChildren: () => import('./pages/news/news.module').then( m => m.NewsPageModule)
   }
