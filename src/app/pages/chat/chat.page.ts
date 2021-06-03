@@ -51,7 +51,7 @@ export class ChatPage implements OnInit {
   }
 
   back(){
-    this.router.navigateByUrl('/detalle-servicio');
+    this.router.navigateByUrl('/detalle');
   }
 
 }

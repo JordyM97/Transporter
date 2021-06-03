@@ -113,7 +113,7 @@ export class FcmService {
         let dia = String(date.getDate()).padStart(2, '0');
         let hora = String(date.getHours());
         let minuto =String(date.getMinutes());
-
+        
         let notObjeto = {
           'title':notification.title,
           'inicio':notification.data.coordStart,
@@ -124,7 +124,7 @@ export class FcmService {
           'valor':notification.data.amountPayment,
           'cliente':this.DriverService.getNameClient()+" "+this.DriverService.getLastNameClient(),
           'idCliente':this.authService.idCliente,   //notification.data.idClientService,    --> id de la tabla client
-          'pkServicio':notification.data.pk
+          'pkServicio':notification.data.idService
         }
 
         this.shareData.nombreNot$.emit(JSON.stringify(notification));
@@ -174,7 +174,7 @@ export class FcmService {
               'valor':notification.notification.data.amountPayment,
               'cliente':this.DriverService.getNameClient()+" "+this.DriverService.getLastNameClient(),
               'idCliente':notification.notification.data.idClientService,    //--> id de la tabla client notification.notification.data.idClientService,
-              'pkServicio':notification.notification.data.pk
+              'pkServicio':notification.notification.data.idService
             }
             localStorage.setItem('idCliente',notification.notification.data.idClientService);           
             console.log(notObjeto)
