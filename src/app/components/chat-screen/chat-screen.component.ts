@@ -59,13 +59,21 @@ export class ChatScreenComponent implements OnInit {
     
     
   }
-
   addPhotoToGallery() {
     this.photoService.addNewToGallery();
   }
 
   sendMessage(){
     this.chatService.addChatMessage(this.chat.id,this.newMsg).then(
+      () => {
+        this.newMsg = '';
+        this.content.scrollToBottom();
+      }
+    )
+  }
+
+  sendMessageDefault(mensaje){
+    this.chatService.addChatMessage(this.chat.id,mensaje).then(
       () => {
         this.newMsg = '';
         this.content.scrollToBottom();
