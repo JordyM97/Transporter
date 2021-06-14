@@ -199,13 +199,14 @@
 }
 .servicioasignado {
   ion-popover{
-    --width: 80% !important;
+    --width: 90vw !important;
+    --min-width: 90vw !important;
   }
   .sc-ion-popover-md-h{
-    --width: 80% !important;
+    --width: 90% !important;
   }
   .sc-ion-modal {
-    --width: 80%;
+    --width: 90%;
   }
   #header-card {
       text-align: center;

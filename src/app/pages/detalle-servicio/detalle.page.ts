@@ -36,7 +36,7 @@ export class DetallePage implements OnInit,OnDestroy {
   watch:any;
   markerC=null;
   //Numero del Cliente, debe llegar en la notificacion
-  numberClient:string = "0989878654";
+  numberClient:string = "0986404042";
 
   public chatRooms: any=[];
   directionsService = new google.maps.DirectionsService();
@@ -86,6 +86,7 @@ export class DetallePage implements OnInit,OnDestroy {
     this.loadMap();
     this.watchPosition();
     this.watchDriverCli(this.authService.idCliente)
+    this.authService.getUserInfo(this.authService.idCliente)
   }
 
 
@@ -103,6 +104,7 @@ export class DetallePage implements OnInit,OnDestroy {
   } 
 
   callByCellphone(){
+    if(this.authService.clientInfo!=null)    this.numberClient=this.authService.clientInfo.celular
     return this.callNumber.callNumber(this.numberClient, true)
     .then(res => console.log('Launched dialer!', res))
     .catch(err => console.error('Error launching dialer', err));

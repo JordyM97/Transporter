@@ -95,7 +95,7 @@ export class FcmService {
         console.log(notification.data)
         this.presentarPopoverNotificacion(notification);
       }else{
-        alert('Notificacion: ' + JSON.stringify(notification));
+        //alert('Notificacion: ' + JSON.stringify(notification));
         console.log("Recibiste una notificacion", JSON.stringify(notification.data))
         let origin=JSON.parse(notification.data.coordStart);
         console.log('Carrera: '+notification.data.pk);

@@ -17,6 +17,7 @@ import { TerminosComponent } from '../pages/terminos/terminos.component';
   providedIn: 'root'
 })
 export class AuthService {
+  public clientInfo:any;
   public idCliente:any;
   public token: any;
   public id:any;
@@ -43,7 +44,22 @@ export class AuthService {
     this.servicios= this.serviciosCollection.valueChanges();
    }
 
-   
+  getUserInfo(id:any){
+    return new Promise((resolve, reject) => {
+      let headers = new HttpHeaders();
+      headers = headers.set('Authorization', String(this.token));
+  
+      this.http.post('https://axela.pythonanywhere.com/api/user/'+id,{headers: headers}) //http://127.0.0.1:8000
+        .subscribe(res => {
+          this.clientInfo=res;
+          resolve("ok");
+          }, (err) => {
+          console.log("Error al  conseguior usuario",err);
+          //resolve("ok");
+          resolve("bad");
+        });  });
+
+  }
   sendNotification(notificacion){ 
     console.log(notificacion);
     return new Promise((resolve, reject) => {
